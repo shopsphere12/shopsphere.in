@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopSphere</title>
+  <title>ShopSphere | Login</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -55,144 +55,61 @@
       background-color: #ffc107;
     }
 
-    /* Slideshow */
-    .slideshow-container {
-      position: relative;
-      margin: auto;
-      max-width: 100%;
-      padding-top: 60px;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .mySlides {
+    /* Modal Styling */
+    .modal {
       display: none;
-      height: 100%;
-    }
-
-    .slideshow-container img {
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border-radius: 5px;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
     }
 
-    .text {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      user-select: none;
-      border-radius: 50%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
-
-    .prev:hover, .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Cards layout */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      margin: 20px;
-    }
-
-    .card {
+    .modal-content {
       background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .card img {
+    .modal-content input {
       width: 100%;
-      height: 200px;
-      object-fit: cover;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    .card-body {
-      padding: 15px;
-      text-align: center;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .card-text {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .btn {
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
       background-color: #007bff;
       color: white;
-      padding: 10px 15px;
-      text-decoration: none;
+      border: none;
       border-radius: 5px;
-      display: inline-block;
-      transition: background-color 0.3s;
+      font-size: 16px;
+      cursor: pointer;
     }
 
-    .btn:hover {
+    .modal-content button:hover {
       background-color: #0056b3;
     }
 
-    /* Footer */
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
+    .modal-content .close {
+      float: right;
+      color: #aaa;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    /* Responsive design */
-    @media (max-width: 600px) {
-      .topnav a {
-        font-size: 14px;
-        margin-right: 10px;
-      }
-
-      .topnav button {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
+    .modal-content .close:hover {
+      color: black;
     }
   </style>
 </head>
@@ -203,110 +120,77 @@
   <a href="index.html">Home</a>
   <a href="shopshpere_HTML_FILES/contact.html">Contact</a>
   <a href="test.html">Registration</a>
-  <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+  <button id="login-btn" onclick="showLoginModal()">Login</button>
+  <button id="logout-btn" onclick="logout()" style="display:none;">Logout</button>
 </div>
 
 <!-- Login Modal -->
-<div id="id01" class="modal" style="display:none;">
+<div id="login-modal" class="modal">
   <div class="modal-content">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
+    <span class="close" onclick="closeLoginModal()">&times;</span>
     <h2>Login</h2>
-    <form action="index.html" method="post">
-      <input type="text" placeholder="Enter Email" name="uemail" required>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+    <form onsubmit="login(event)">
+      <input type="email" id="email" placeholder="Enter Email" required>
+      <input type="password" id="password" placeholder="Enter Password" required>
       <button type="submit">Login</button>
     </form>
   </div>
 </div>
 
-<!-- Slideshow -->
-<div class="slideshow-container">
-  <div class="mySlides fade">
-    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Bar Sink Automatic Washing Device">
-    <div class="text">Glass Bar Sink Automatic Washing Device</div>
-  </div>
-  <div class="mySlides fade">
-    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier">
-    <div class="text">Tap Filter Multilayer Clean Purifier Filter Cartridge</div>
-  </div>
-  <div class="mySlides fade">
-    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer Blender">
-    <div class="text">USB Rechargeable Mini Juicer Blender</div>
-  </div>
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
-
-<!-- Product Cards -->
-<div class="card-container">
-  <div class="card">
-    <img src="SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" alt="Portable Fan Cooler">
-    <div class="card-body">
-      <h5 class="card-title">Portable Fan Cooler</h5>
-      <p class="card-text">Smart and energy-efficient cooler providing fresh air at customized positions.</p>
-      <p class="card-text">Price: &#8377;699</p>
-      <a href="fan.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer">
-    <div class="card-body">
-      <h5 class="card-title">USB Rechargeable Mini Juicer</h5>
-      <p class="card-text">Portable electric juicer bottle for juices, shakes, and smoothies.</p>
-      <p class="card-text">Price: &#8377;499</p>
-      <a href="bottle.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Rinser For Kitchen Sink">
-    <div class="card-body">
-      <h5 class="card-title">Glass Rinser For Kitchen Sink</h5>
-      <p class="card-text">Accessories for cleaning bottles, cups, and glasses efficiently.</p>
-      <p class="card-text">Price: &#8377;399</p>
-      <a href="glass.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter">
-    <div class="card-body">
-      <h5 class="card-title">Tap Filter</h5>
-      <p class="card-text">Activated carbon faucet water filters for cleaner tap water.</p>
-      <p class="card-text">Price: &#8377;199</p>
-      <a href="tappurifier.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer>
-  <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
-</footer>
-
 <script>
-  let slideIndex = 0;
+  // Function to show login modal
+  function showLoginModal() {
+    document.getElementById('login-modal').style.display = 'block';
+  }
 
-  function showSlides() {
-    let slides = document.getElementsByClassName("mySlides");
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+  // Function to close login modal
+  function closeLoginModal() {
+    document.getElementById('login-modal').style.display = 'none';
+  }
+
+  // Login function
+  function login(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    // Simple hardcoded authentication
+    if (email === "user@example.com" && password === "password123") {
+      alert('Login successful!');
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('userEmail', email);
+      updateUI();
+      closeLoginModal();
+    } else {
+      alert('Invalid email or password!');
     }
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3000);
   }
 
-  function plusSlides(n) {
-    slideIndex += n;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    if (slideIndex < 1) { slideIndex = slides.length; }
-    showSlides();
+  // Logout function
+  function logout() {
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('userEmail');
+    updateUI();
+    alert('You have been logged out!');
   }
 
-  showSlides();
+  // Function to update UI based on login status
+  function updateUI() {
+    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (isLoggedIn) {
+      loginBtn.style.display = 'none';
+      logoutBtn.style.display = 'block';
+    } else {
+      loginBtn.style.display = 'block';
+      logoutBtn.style.display = 'none';
+    }
+  }
+
+  // Update UI on page load
+  document.addEventListener('DOMContentLoaded', updateUI);
 </script>
 
 </body>
