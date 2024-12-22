@@ -1,66 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Form</title>
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+  }
 
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+  }
 
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
 
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+  }
 
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
+  input[type=text], input[type=email], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
 </style>
 </head>
 <body>
 
-<p align="center"><h1>Contact From</p></h1>
-  <br>
-  <br>
-  <br>
- 
+<h1>Contact Form</h1>
 
 <div class="container">
   <form action="https://api.web3forms.com/submit" method="POST">
     <input type="hidden" name="access_key" value="9b9a1c4c-26b4-4ac8-831e-6053c94bfe58">
+    
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
+    <input type="text" id="fname" name="firstname" placeholder="Enter your first name" required aria-label="First Name">
+    
     <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-   <label for="country">your country</label>
-    <input type="text" id="country" name="country" placeholder="Your country...">
-
-
-    <label for="comment">comment</label>
-   <input type="text" id="comment" name="comment" placeholder="Your comment on shopsphere!!!">
-
+    <input type="text" id="lname" name="lastname" placeholder="Enter your last name" required aria-label="Last Name">
+    
+    <label for="country">Country</label>
+    <input type="text" id="country" name="country" placeholder="Enter your country" required aria-label="Country">
+    
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" placeholder="Share your thoughts about Shopsphere" required aria-label="Comment"></textarea>
+    
     <input type="submit" value="Submit">
   </form>
 </div>
