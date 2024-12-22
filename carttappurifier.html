@@ -1,86 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopSphere
-    </title>
-    <h1 aling="CENTER" ;="" style="FONT-SIZE:40;  COLOR:rgb(16, 215, 230);"> SHOP SPHERE </h1>
-   <img src="81R-kaBBlsL._SX466_.jpg" width="700" height="700">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <style>
-<style>
-    button
-          {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-body {
-  font-family: Arial;
-  font-size: 17px;
-  padding: 8px;
-}
-.icon-container {
-  margin-bottom: 20px;
-  padding: 7px 0;
-  font-size: 24px;
-}
-.container {
-  background-color: #f2f2f2;
-  padding: 5px 20px 15px 20px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-}
+    <meta name="description" content="ShopSphere - Secure Checkout Page">
+    <meta name="keywords" content="ShopSphere, Cart, Checkout, Payment">
+    <meta name="author" content="ShopSphere">
+    <title>ShopSphere | Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
 
+        .header {
+            background: linear-gradient(to right, #10d7e6, #0a9fbf);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-span.price {
-  float: right;
-  color: grey;
-}
+        .container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
-@media (max-width: 800px) {
-  .row {
-    flex-direction: column-reverse;
-  }
-  .col-25 {
-    margin-bottom: 20px;
-  }
-}
-</style>
+        h4 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .price {
+            float: right;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #028a57;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .btn {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-     
-  <div class="col-25">
-    <div class="container">
-      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>1</b></span></h4>
-      <p><a href="https://shopsphere12.github.io/shopsphere.in/tappurifier.html">Product 1</a> <span class="price">₹199</span></p>
-      <p><a href="#">delivery service</a> <span class="price">₹51</span></p>
-    
-      <div class="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_PZ6r6CvyBnpZHL/view" data-text="Pay Now" data-color="#528FF0" data-size="large">
-        <script>
-          (function(){
-            var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
-            if(x){ var s=d.createElement('script'); s.defer=!0;s.id='razorpay-embed-btn-js';
-            s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
-            rzp && rzp.init && rzp.init()}})();
-        </script>
-      </div>
-          
-                    
-        <h2>Make sure you have register in the home page !!!</h2>
-    
-      <br>
-        
-    </div>
-  </div>
+
+<div class="header">
+    SHOP SPHERE
 </div>
- </body>
- </html>
-     
+
+<div class="container">
+    <h4>
+        Cart 
+        <span class="price"><i class="fa fa-shopping-cart"></i> <b>1</b></span>
+    </h4>
+    <p><a href="https://shopsphere12.github.io/shopsphere.in/tappurifier.html">Product 1</a> <span class="price">₹199</span></p>
+    <p>Delivery Service <span class="price">₹51</span></p>
+    <hr>
+    <p>Total <span class="price" style="color:black"><b>₹250</b></span></p>
+
+    <div class="icon-container">
+        <i class="fa fa-credit-card"></i> <i class="fa fa-paypal"></i> <i class="fa fa-money"></i>
+    </div>
+
+    <div class="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_PZ6r6CvyBnpZHL/view" data-text="Pay Now" data-color="#528FF0" data-size="large">
+        <script>
+            (function() {
+                var d = document; 
+                var x = !d.getElementById('razorpay-embed-btn-js');
+                if (x) { 
+                    var s = d.createElement('script'); 
+                    s.defer = !0; 
+                    s.id = 'razorpay-embed-btn-js';
+                    s.src = 'https://cdn.razorpay.com/static/embed_btn/bundle.js'; 
+                    d.body.appendChild(s);
+                } else {
+                    var rzp = window['__rzp__'];
+                    rzp && rzp.init && rzp.init();
+                }
+            })();
+        </script>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px; color: #555;">Make sure you have registered on the homepage!</p>
+</div>
+
+<div class="footer">
+    &copy; 2024 ShopSphere. All rights reserved.
+</div>
+
+</body>
+</html>
