@@ -1,456 +1,309 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSphere</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
 
-.topnav {
-  overflow: hidden;
-  background-color: #ffffff;
-}
+    /* Navigation bar */
+    .topnav {
+      background-color: #007bff;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.topnav a {
-  float: left;
-  color: #ff0000;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
+    .topnav a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      margin-right: 20px;
+      transition: color 0.3s;
+    }
 
-.topnav a:hover {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-}
+    .topnav a:hover {
+      color: #ffdd57;
+    }
 
-/* Create a right-aligned (split) link inside the navigation bar */
-.topnav a.split {
-  float: right;
-  background-color: #ffffff;
-  color: white;
-}
-a:link, a:visited {
-  background-color: #ffffff;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
+    .topnav button {
+      margin-left: auto;
+      background-color: #ffdd57;
+      color: #007bff;
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-a:hover, a:active {
-  background-color: rgb(255, 60, 0);
-}a:link, a:visited {
-  background-color: #f44336;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
+    .topnav button:hover {
+      background-color: #ffc107;
+    }
 
-a:hover, a:active {
-  background-color: red;
-}
-  * {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.mySlides {display: none}
-img {vertical-align: middle;}
+    /* Slideshow */
+    .slideshow-container {
+      position: relative;
+      margin: auto;
+      max-width: 100%;
+      padding-top: 60px;
+    }
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+    .mySlides {
+      display: none;
+    }
 
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
+    .slideshow-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+    .text {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
 
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      user-select: none;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
 
-/* Caption text */
-.text {
-  color: #a72e2e;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+    .prev {
+      left: 10px;
+    }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #000000;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+    .next {
+      right: 10px;
+    }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #000000;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+    .prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
 
-.active, .dot:hover {
-  background-color: #ffffff;
-}
+    /* Cards layout */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      margin: 20px;
+    }
 
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
 
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
-  body {font-family: Arial, Helvetica, sans-serif;}
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+    .card-body {
+      padding: 15px;
+      text-align: center;
+    }
 
-/* Set a style for all buttons */
-button {
-  background-color: #ff0505;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-button:hover {
-  opacity: 0.8;
-}
+    .card-text {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
+    .btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
 
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
+    .btn:hover {
+      background-color: #0056b3;
+    }
 
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
 
-.container {
-  padding: 16px;
-}
+    /* Responsive design */
+    @media (max-width: 600px) {
+      .topnav a {
+        font-size: 14px;
+        margin-right: 10px;
+      }
 
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
+      .topnav button {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-
+<!-- Navigation Bar -->
 <div class="topnav">
-  <a class="action" href="index.html">Home</a>
+  <a href="index.html">Home</a>
   <a href="shopshpere_HTML_FILES/contact.html">Contact</a>
   <a href="test.html">Registration</a>
-  
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+  <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+</div>
 
-<div id="id01" class="modal">
-  
-  <form  class="modal-content animate" action="index.html" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="images (2).jpeg" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Email</b></label>
+<!-- Login Modal -->
+<div id="id01" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
+    <h2>Login</h2>
+    <form action="index.html" method="post">
       <input type="text" placeholder="Enter Email" name="uemail" required>
-
-      <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
-        
       <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
+    </form>
+  </div>
+</div>
+
+<!-- Slideshow -->
+<div class="slideshow-container">
+  <div class="mySlides fade">
+    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Bar Sink Automatic Washing Device">
+    <div class="text">Glass Bar Sink Automatic Washing Device</div>
+  </div>
+  <div class="mySlides fade">
+    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier">
+    <div class="text">Tap Filter Multilayer Clean Purifier Filter Cartridge</div>
+  </div>
+  <div class="mySlides fade">
+    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer Blender">
+    <div class="text">USB Rechargeable Mini Juicer Blender</div>
+  </div>
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<!-- Product Cards -->
+<div class="card-container">
+  <div class="card">
+    <img src="Portable-Fan-Cooler-17-5-23-01.jpg" alt="Portable Fan Cooler">
+    <div class="card-body">
+      <h5 class="card-title">Portable Fan Cooler</h5>
+      <p class="card-text">Smart and energy-efficient cooler providing fresh air at customized positions.</p>
+      <p class="card-text">Price: &#8377;699</p>
+      <a href="fan.html" class="btn">Add to Cart</a>
     </div>
+  </div>
 
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-      
+  <div class="card">
+    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer">
+    <div class="card-body">
+      <h5 class="card-title">USB Rechargeable Mini Juicer</h5>
+      <p class="card-text">Portable electric juicer bottle for juices, shakes, and smoothies.</p>
+      <p class="card-text">Price: &#8377;499</p>
+      <a href="bottle.html" class="btn">Add to Cart</a>
     </div>
-  </form>
+  </div>
+
+  <div class="card">
+    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Rinser For Kitchen Sink">
+    <div class="card-body">
+      <h5 class="card-title">Glass Rinser For Kitchen Sink</h5>
+      <p class="card-text">Accessories for cleaning bottles, cups, and glasses efficiently.</p>
+      <p class="card-text">Price: &#8377;399</p>
+      <a href="glass.html" class="btn">Add to Cart</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter">
+    <div class="card-body">
+      <h5 class="card-title">Tap Filter</h5>
+      <p class="card-text">Activated carbon faucet water filters for cleaner tap water.</p>
+      <p class="card-text">Price: &#8377;999</p>
+      <a href="filter.html" class="btn">Add to Cart</a>
+    </div>
+  </div>
 </div>
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <Br>
-  <br>
-  <div class="slideshow-container">
-
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" style="width:40%">
-  <div class="text">Glass Bar Sink Automatic Washing Device </div>
-</div>
-
-    <div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="81R-kaBBlsL._SX466_.jpg" style="width:40%">
-  <div class="text">Tap filter Multilayer Clean Purifier Filter Cartridge Five Layer Water Filter </div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="shopping.webp" style="width:40%">
-  <div class="text">USB Rechargeable Mini Juicer Blender | Portable Electric Juicer Bottle for Juices, Shakes, and Smoothies</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="./SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" style="width:40%">
-  <div class="text">Portable Fan Cooler</div>
-</div>
-
-<a class="prev" onclick="plusSlides(-1)">❮</a>
-<a class="next" onclick="plusSlides(1)">❯</a>
-
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-</div>
+<!-- Footer -->
+<footer>
+  <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
+</footer>
 
 <script>
-let slideIndex = 1;
-showSlides(slideIndex);
+  let slideIndex = 0;
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+  function showSlides() {
+    let slides = document.getElementsByClassName("mySlides");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000);
   }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+
+  function plusSlides(n) {
+    slideIndex += n;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    if (slideIndex < 1) { slideIndex = slides.length; }
+    showSlides();
   }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
+
+  showSlides();
 </script>
-  <br>
-  <br>
-  <br>
-  <Br>
-  <br>
 
-  <div class="container">
-  <div class="row">
-    <div class="col-lg-3">
-  <div class="card">
-  <img src="./SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" class="card-img-top" width="375" height="375" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Portable Fan Cooler</h5>
-    <p class="card-text">Portable Cooler is a smart, energy-efficient and mini-sized cooler that gives you a fresh and the cool breeze of air at customised positions.</p>
-    <p class="card-text">Price;₹699</p>
-    <a href="fan.html" class="btn btn-primary"> Cart</a>
-  </div>
-</div>
-      <br>
-      <br>
-      <br>
-       <br>
-       <br>
-       <div class="container">
-  <div class="row">
-    <div class="col-lg-3">
-  <div class="card">
-  <img src="shopping.webp" class="card-img-top" width="375" height="375" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">USB Rechargeable Mini Juicer Blender</h5>
-    <p class="card-text">USB Rechargeable Mini Juicer Blender | Portable Electric Juicer Bottle for Juices, Shakes, and Smoothies | Personal Size 420ML </p>
-    <p class="card-text">Price;₹499</p>
-    <a href="bottle.html" class="btn btn-primary"> Cart</a>
-  </div>
-    <br>
-    <br>
-    <br>
-     <br>
-     <br>
-     <div class="container">
-  <div class="row">
-    <div class="col-lg-3">
-  <div class="card">
-  <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" class="card-img-top" width="375" height="375" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Glass Rinser For Kitchen Sink</h5>
-    <p class="card-text">ZZHOME Glass Rinser For Kitchen Sink Accessories Cup Washer For Sink Bottle Cleaner Sink Attachment Sink Cup Rinser.</p>
-    <p class="card-text">Price;₹399</p>
-    <a href="glass.html" class="btn btn-primary"> Cart</a>
-  </div>
-     <br>
-    <br>
-    <br>
-     <br>
-     <br>
-     <div class="container">
-  <div class="row">
-    <div class="col-lg-3">
-  <div class="card">
-  <img src="81R-kaBBlsL._SX466_.jpg" class="card-img-top" width="375" height="375" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Tap Filter</h5>
-    <p class="card-text">HELSTA® Activated Carbon Faucet Water Filters Universal Interface Home Kitchen Faucet Tap Water</p>
-    <p class="card-text">Price;₹199</p>
-    <a href="tappurifier.html" class="btn btn-primary"> Cart</a>
-  </div> 
-    
 </body>
 </html>
