@@ -36,14 +36,15 @@
 
     /* Slideshow Styles */
     .slideshow-container {
-      max-width: 1000px;
+      max-width: 600px; /* Reduced the container width to make the slides smaller */
       position: relative;
       margin: auto;
     }
 
     .mySlides {
       display: none;
-      width: 100%;
+      width: 100%; /* Make image width 100% of the container */
+      height: auto;
     }
 
     .prev, .next {
@@ -286,42 +287,4 @@
 <div style="text-align:center">
   <span class="dot" onclick="currentSlide(1)"></span>
   <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span>
-</div>
-
-<!-- JavaScript for Slideshow -->
-<script>
-  let slideIndex = 1;
-  showSlides(slideIndex);
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  function currentSlide(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-  }
-</script>
-
-</body>
-</html>
+ 
