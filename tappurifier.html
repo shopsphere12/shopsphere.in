@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>ShopSphere</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopSphere - Tap Filter Product Details">
+    <title>ShopSphere | Water Filter</title>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #f9f9f9;
+            color: #333;
         }
 
-        h1 {
+        .header {
             text-align: center;
-            font-size: 42px;
-            color: #10d7e6;
-            margin: 20px 0;
+            background: linear-gradient(to right, #10d7e6, #0a9fbf);
+            color: white;
+            padding: 20px 10px;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
-        h2 {
+        .header h1 {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        .product-title {
             text-align: center;
-            font-size: 24px;
-            color: #343a40;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            font-size: 28px;
+            color: #333;
         }
 
         .card {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             max-width: 350px;
             margin: 20px auto;
-            background-color: #ffffff;
+            background-color: white;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
         }
 
         .card img {
@@ -47,89 +51,96 @@
         }
 
         .card-content {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
 
         .card-content h1 {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            color: #28a745;
-            font-size: 24px;
-            margin: 15px 0;
-            font-weight: bold;
-        }
-
-        .description {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .shipping {
-            font-size: 14px;
-            color: #888;
+            font-size: 22px;
             margin: 10px 0;
         }
 
-        .card button {
-            display: inline-block;
-            padding: 12px 20px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .card-content p {
             font-size: 16px;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #4caf50;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .shipping {
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .card button {
+            width: 100%;
+            background-color: #000;
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 0 0 10px 10px;
         }
 
         .card button:hover {
-            background-color: #0056b3;
+            background-color: #333;
         }
 
-        .card a {
-            text-decoration: none;
+        .card button a {
             color: white;
+            text-decoration: none;
+            display: block;
         }
 
-        .footer {
-            text-align: center;
-            margin: 30px 0;
-            font-size: 14px;
-            color: #6c757d;
+        @media (max-width: 768px) {
+            .card {
+                max-width: 90%;
+            }
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            .product-title {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
 
-<h1>SHOP SPHERE</h1>
-
-<h2>Water Filter</h2>
-
-<div class="card">
-    <img src="81R-kaBBlsL._SX466_.jpg" alt="HELSTA® Activated Carbon Faucet Water Filters">
-    <div class="card-content">
-        <h1>Tap Filter Multilayer Clean Purifier</h1>
-        <p class="price">₹199</p>
-        <p class="description">
-            KBS Tap Water Purifier Filter Faucet with 6 Layers of Carbon Activation. Removes Dust, Chlorine, and Softens Water.
-            Perfect for Kitchen Sinks, Bathroom Wash Basins, and Drinking Use.
-        </p>
-        <p class="shipping">+₹51 Shipping</p>
-        <button><a href="carttappurifier.html">Add to Cart</a></button>
+    <!-- Header -->
+    <div class="header">
+        Shop Sphere
     </div>
-</div>
 
-<div class="footer">
-    &copy; 2024 ShopSphere. Crafted with ❤️ for our customers.
-</div>
+    <!-- Product Title -->
+    <h2 class="product-title">Water Filter</h2>
+
+    <!-- Product Card -->
+    <div class="card">
+        <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier" />
+        <div class="card-content">
+            <h1>Tap Filter Multilayer Clean Purifier</h1>
+            <p class="price">₹199</p>
+            <p>
+                KBS Tap Water Purifier Filter Faucet 6 Layer Carbon Activated Dust Chlorine Remover Water Softener for Drinking Cartridge Alkaline Taps for Kitchen Sink Bathroom Wash Basin (Multicolor).
+            </p>
+            <p class="shipping">+ ₹51 Shipping</p>
+            <button>
+                <a href="carttappurifier.html">Add to Cart</a>
+            </button>
+        </div>
+    </div>
 
 </body>
 </html>
