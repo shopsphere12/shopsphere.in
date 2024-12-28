@@ -316,6 +316,7 @@
     <button onclick="performSearch()">Search</button>
   </div>
   <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
+  <span id="userSpan" style="color: white; margin-left: 20px;"></span> <!-- For displaying the username -->
 </div>
 
 <!-- Login Modal -->
@@ -420,6 +421,7 @@
       localStorage.setItem('loggedInUser', username);
       document.getElementById('id01').style.display = 'none';
       updateLoginStatus();
+      window.location.href = 'index.html'; // Redirect to home page
     } else {
       alert('Please enter a valid username and password.');
     }
@@ -428,13 +430,12 @@
   function updateLoginStatus() {
     const username = localStorage.getItem('loggedInUser');
     if (username) {
-      document.getElementById('loginButton').innerText = 'Logout';
-      document.getElementById('loginButton').onclick = function() {
-        localStorage.removeItem('loggedInUser');
-        updateLoginStatus();
-      };
+      document.getElementById('loginButton').style.display = 'none';
+      document.getElementById('userSpan').innerText = `Hello, ${username}`;
     }
   }
+
+  window.onload = updateLoginStatus;
 </script>
 
 </body>
