@@ -84,6 +84,18 @@
       background-color: #ffc107;
     }
 
+    /* Update the position of the user span */
+    #userSpan {
+      color: white;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    /* Adjust the login button positioning */
+    #loginButton {
+      margin-left: 20px;
+    }
+
     /* Modal Styling */
     .modal {
       display: none;
@@ -315,8 +327,8 @@
     <input type="text" id="search-input" placeholder="Search...">
     <button onclick="performSearch()">Search</button>
   </div>
+  <span id="userSpan"></span>
   <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
-  <span id="userSpan" style="color: white; margin-left: 20px;"></span> <!-- For displaying the username -->
 </div>
 
 <!-- Login Modal -->
@@ -420,23 +432,25 @@
     if (username && password) {
       localStorage.setItem('loggedInUser', username);
       document.getElementById('id01').style.display = 'none';
-      updateLoginStatus();
-      window.location.href = 'index.html'; // Redirect to home page
-    } else {
-      alert('Please enter a valid username and password.');
-    }
-  }
-
-  function updateLoginStatus() {
-    const username = localStorage.getItem('loggedInUser');
-    if (username) {
       document.getElementById('loginButton').style.display = 'none';
       document.getElementById('userSpan').innerText = `Hello, ${username}`;
+    } else {
+      alert('Please enter both username and password');
     }
   }
 
-  window.onload = updateLoginStatus;
-</script>
+  function performSearch() {
+    const query = document.getElementById('search-input').value;
+    alert(`Searching for: ${query}`);
+  }
 
+  window.onload = function() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      document.getElementById('loginButton').style.display = 'none';
+      document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
+    }
+  }
+</script>
 </body>
 </html>
