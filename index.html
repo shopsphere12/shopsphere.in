@@ -324,7 +324,7 @@
     <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
     <h2>Login</h2>
     <form id="loginForm">
-      <input type="text" placeholder="Enter Email" id="emailInput" name="uemail" required>
+      <input type="text" placeholder="Enter Username" id="usernameInput" name="username" required>
       <input type="password" placeholder="Enter Password" id="passwordInput" name="psw" required>
       <button type="button" onclick="loginUser()">Login</button>
     </form>
@@ -413,44 +413,29 @@
   showSlides();
 
   function loginUser() {
-    const email = document.getElementById('emailInput').value;
+    const username = document.getElementById('usernameInput').value;
     const password = document.getElementById('passwordInput').value;
 
-    if (email && password) {
-      localStorage.setItem('loggedInUser', email);
+    if (username && password) {
+      localStorage.setItem('loggedInUser', username);
       document.getElementById('id01').style.display = 'none';
       updateLoginStatus();
     } else {
-      alert('Please enter valid email and password.');
+      alert('Please enter a valid username and password.');
     }
   }
 
   function updateLoginStatus() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const loginButton = document.getElementById('loginButton');
-    if (loggedInUser) {
-      loginButton.textContent = loggedInUser;
-      loginButton.onclick = null; // Disable further clicking
-      loginButton.style.backgroundColor = '#fff';
-      loginButton.style.color = '#007bff';
-      loginButton.style.cursor = 'default';
-    }
-  }
-
-  // Update the login status on page load
-  window.onload = updateLoginStatus;
-
-  function performSearch() {
-    const query = document.getElementById('search-input').value;
-    if (query) {
-      alert(`Searching for "${query}"...`);
-      // Implement search logic here
-    } else {
-      alert('Please enter a search query.');
+    const username = localStorage.getItem('loggedInUser');
+    if (username) {
+      document.getElementById('loginButton').innerText = 'Logout';
+      document.getElementById('loginButton').onclick = function() {
+        localStorage.removeItem('loggedInUser');
+        updateLoginStatus();
+      };
     }
   }
 </script>
 
 </body>
 </html>
-
