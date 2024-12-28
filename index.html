@@ -315,7 +315,7 @@
     <input type="text" id="search-input" placeholder="Search...">
     <button onclick="performSearch()">Search</button>
   </div>
-  <button onclick="document.getElementById('id01').style.display='block'">Login</button>
+  <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
 </div>
 
 <!-- Login Modal -->
@@ -323,10 +323,10 @@
   <div class="modal-content">
     <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
     <h2>Login</h2>
-    <form action="index.html" method="post">
-      <input type="text" placeholder="Enter Email" name="uemail" required>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-      <button type="submit">Login</button>
+    <form id="loginForm">
+      <input type="text" placeholder="Enter Email" id="emailInput" name="uemail" required>
+      <input type="password" placeholder="Enter Password" id="passwordInput" name="psw" required>
+      <button type="button" onclick="loginUser()">Login</button>
     </form>
   </div>
 </div>
@@ -410,30 +410,47 @@
     slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 3000);
   }
+  showSlides();
 
-  function plusSlides(n) {
-    slideIndex += n;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    if (slideIndex < 1) { slideIndex = slides.length; }
-    showSlides();
+  function loginUser() {
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passwordInput').value;
+
+    if (email && password) {
+      localStorage.setItem('loggedInUser', email);
+      document.getElementById('id01').style.display = 'none';
+      updateLoginStatus();
+    } else {
+      alert('Please enter valid email and password.');
+    }
   }
+
+  function updateLoginStatus() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const loginButton = document.getElementById('loginButton');
+    if (loggedInUser) {
+      loginButton.textContent = loggedInUser;
+      loginButton.onclick = null; // Disable further clicking
+      loginButton.style.backgroundColor = '#fff';
+      loginButton.style.color = '#007bff';
+      loginButton.style.cursor = 'default';
+    }
+  }
+
+  // Update the login status on page load
+  window.onload = updateLoginStatus;
 
   function performSearch() {
-    const query = document.getElementById("search-input").value.toLowerCase();
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-      const title = card.querySelector(".card-title").textContent.toLowerCase();
-      if (title.includes(query)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
+    const query = document.getElementById('search-input').value;
+    if (query) {
+      alert(`Searching for "${query}"...`);
+      // Implement search logic here
+    } else {
+      alert('Please enter a search query.');
+    }
   }
-
-  showSlides();
 </script>
 
 </body>
 </html>
+
