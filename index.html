@@ -55,6 +55,43 @@
       background-color: #ffc107;
     }
 
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      position: relative;
+    }
+
+    .search-bar input {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 200px;
+      transition: width 0.3s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      width: 300px;
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .search-bar button:hover {
+      color: #007bff;
+    }
+
     /* Slideshow */
     .slideshow-container {
       position: relative;
@@ -203,6 +240,10 @@
   <a href="index.html">Home</a>
   <a href="shopshpere_HTML_FILES/contact.html">Contact</a>
   <a href="test.html">Registration</a>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search...">
+    <button onclick="performSearch()">&#x1F50D;</button>
+  </div>
   <button onclick="document.getElementById('id01').style.display='block'">Login</button>
 </div>
 
@@ -304,6 +345,13 @@
     if (slideIndex > slides.length) { slideIndex = 1; }
     if (slideIndex < 1) { slideIndex = slides.length; }
     showSlides();
+  }
+
+  function performSearch() {
+    const query = document.getElementById("search").value;
+    if (query) {
+      alert(`Search functionality not implemented yet. You searched for: ${query}`);
+    }
   }
 
   showSlides();
