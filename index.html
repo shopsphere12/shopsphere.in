@@ -84,6 +84,76 @@
       background-color: #ffc107;
     }
 
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .modal-content button:hover {
+      background-color: #0056b3;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+    }
+
     /* Slideshow */
     .slideshow-container {
       position: relative;
@@ -249,7 +319,7 @@
 </div>
 
 <!-- Login Modal -->
-<div id="id01" class="modal" style="display:none;">
+<div id="id01" class="modal">
   <div class="modal-content">
     <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
     <h2>Login</h2>
@@ -367,4 +437,3 @@
 
 </body>
 </html>
-
