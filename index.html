@@ -1,456 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopSphere</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-
-    /* Navigation bar */
-    .topnav {
-      background-color: #007bff;
-      overflow: hidden;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .topnav a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      margin-right: 20px;
-      transition: color 0.3s;
-    }
-
-    .topnav a:hover {
-      color: #ffdd57;
-    }
-
-    .topnav button {
-      margin-left: auto;
-      background-color: #ffdd57;
-      color: #007bff;
-      border: none;
-      padding: 8px 16px;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .topnav button:hover {
-      background-color: #ffc107;
-    }
-
-    .search-bar {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-    }
-
-    .search-bar input[type="text"] {
-      padding: 5px;
-      font-size: 14px;
-      border: none;
-      border-radius: 3px;
-    }
-
-    .search-bar button {
-      margin-left: 5px;
-      padding: 6px 10px;
-      background-color: #ffdd57;
-      color: #007bff;
-      border: none;
-      font-size: 14px;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .search-bar button:hover {
-      background-color: #ffc107;
-    }
-
-    /* Update the position of the user span */
-    #userSpan {
-      color: white;
-      margin-left: 20px;
-      font-size: 16px;
-    }
-
-    /* Adjust the login button positioning */
-    #loginButton {
-      margin-left: 20px;
-    }
-
-    /* Modal Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1001;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      font-size: 24px;
-      text-align: center;
-    }
-
-    .modal-content input[type="text"],
-    .modal-content input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    .modal-content button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-    }
-
-    .modal-content button:hover {
-      background-color: #0056b3;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-    }
-
-    /* Slideshow */
-    .slideshow-container {
-      position: relative;
-      margin: auto;
-      max-width: 100%;
-      padding-top: 60px;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .mySlides {
-      display: none;
-      height: 100%;
-    }
-
-    .slideshow-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 5px;
-    }
-
-    .text {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      user-select: none;
-      border-radius: 50%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .prev {
-      left: 10px;
-    }
-
-    .next {
-      right: 10px;
-    }
-
-    .prev:hover, .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    /* Cards layout */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      margin: 20px;
-    }
-
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 15px;
-      text-align: center;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .card-text {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
-      border-radius: 5px;
-      display: inline-block;
-      transition: background-color 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-    }
-
-    /* Responsive design */
-    @media (max-width: 600px) {
-      .topnav a {
-        font-size: 14px;
-        margin-right: 10px;
-      }
-
-      .topnav button {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-
-      .search-bar input[type="text"] {
-        width: 100px;
-      }
-
-      .search-bar button {
-        font-size: 12px;
-        padding: 5px;
-      }
-    }
-  </style>
+    <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSphere</title>
 </head>
 <body>
-
 <!-- Navigation Bar -->
 <div class="topnav">
-  <a href="index.html">Home</a>
-  <a href="shopshpere_HTML_FILES/contact.html">Contact</a>
-  <a href="test.html">Registration</a>
-  <div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search...">
-    <button onclick="performSearch()">Search</button>
+    <a href="index.html">Home</a>
+    <a href="shopshpere_HTML_FILES/contact.html">Contact</a>
+    <a href="test.html">Registration</a>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button onclick="performSearch()">Search</button>
+    </div>
+    <span id="userSpan"></span>
+    <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
   </div>
-  <span id="userSpan"></span>
-  <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
-</div>
-
-<!-- Login Modal -->
-<div id="id01" class="modal">
-  <div class="modal-content">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
-    <h2>Login</h2>
-    <form id="loginForm">
-      <input type="text" placeholder="Enter Username" id="usernameInput" name="username" required>
-      <input type="password" placeholder="Enter Password" id="passwordInput" name="psw" required>
-      <button type="button" onclick="loginUser()">Login</button>
-    </form>
-  </div>
-</div>
-
-<!-- Slideshow -->
-<div class="slideshow-container">
-  <div class="mySlides fade">
-    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Bar Sink Automatic Washing Device">
-    <div class="text">Glass Bar Sink Automatic Washing Device</div>
-  </div>
-  <div class="mySlides fade">
-    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier">
-    <div class="text">Tap Filter Multilayer Clean Purifier Filter Cartridge</div>
-  </div>
-  <div class="mySlides fade">
-    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer Blender">
-    <div class="text">USB Rechargeable Mini Juicer Blender</div>
-  </div>
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
-
-<!-- Product Cards -->
-<div class="card-container">
-  <div class="card">
-    <img src="SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" alt="Portable Fan Cooler">
-    <div class="card-body">
-      <h5 class="card-title">Portable Fan Cooler</h5>
-      <p class="card-text">Smart and energy-efficient cooler providing fresh air at customized positions.</p>
-      <p class="card-text">Price: &#8377;699</p>
-      <a href="fan.html" class="btn">Add to Cart</a>
+  
+  <!-- Login Modal -->
+  <div id="id01" class="modal">
+    <div class="modal-content">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" placeholder="Enter Username" id="usernameInput" name="username" required>
+        <input type="password" placeholder="Enter Password" id="passwordInput" name="psw" required>
+        <button type="button" onclick="loginUser()">Login</button>
+      </form>
     </div>
   </div>
-
-  <div class="card">
-    <img src="shopping.webp" alt="USB Rechargeable Mini Juicer">
-    <div class="card-body">
-      <h5 class="card-title">USB Rechargeable Mini Juicer</h5>
-      <p class="card-text">Portable electric juicer bottle for juices, shakes, and smoothies.</p>
-      <p class="card-text">Price: &#8377;499</p>
-      <a href="bottle.html" class="btn">Add to Cart</a>
+  
+  <!-- Slideshow -->
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Bar Sink Automatic Washing Device">
+      <div class="text">Glass Bar Sink Automatic Washing Device</div>
+    </div>
+    <div class="mySlides fade">
+      <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier">
+      <div class="text">Tap Filter Multilayer Clean Purifier Filter Cartridge</div>
+    </div>
+    <div class="mySlides fade">
+      <img src="shopping.webp" alt="USB Rechargeable Mini Juicer Blender">
+      <div class="text">USB Rechargeable Mini Juicer Blender</div>
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  
+  <!-- Product Cards -->
+  <div class="card-container">
+    <div class="card">
+      <img src="SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" alt="Portable Fan Cooler">
+      <div class="card-body">
+        <h5 class="card-title">Portable Fan Cooler</h5>
+        <p class="card-text">Smart and energy-efficient cooler providing fresh air at customized positions.</p>
+        <p class="card-text">Price: &#8377;699</p>
+        <a href="fan.html" class="btn">Add to Cart</a>
+      </div>
+    </div>
+  
+    <div class="card">
+      <img src="shopping.webp" alt="USB Rechargeable Mini Juicer">
+      <div class="card-body">
+        <h5 class="card-title">USB Rechargeable Mini Juicer</h5>
+        <p class="card-text">Portable electric juicer bottle for juices, shakes, and smoothies.</p>
+        <p class="card-text">Price: &#8377;499</p>
+        <a href="bottle.html" class="btn">Add to Cart</a>
+      </div>
+    </div>
+  
+    <div class="card">
+      <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Rinser For Kitchen Sink">
+      <div class="card-body">
+        <h5 class="card-title">Glass Rinser For Kitchen Sink</h5>
+        <p class="card-text">Accessories for cleaning bottles, cups, and glasses efficiently.</p>
+        <p class="card-text">Price: &#8377;399</p>
+        <a href="glass.html" class="btn">Add to Cart</a>
+      </div>
+    </div>
+  
+    <div class="card">
+      <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter">
+      <div class="card-body">
+        <h5 class="card-title">Tap Filter</h5>
+        <p class="card-text">Activated carbon faucet water filters for cleaner tap water.</p>
+        <p class="card-text">Price: &#8377;199</p>
+        <a href="tappurifier.html" class="btn">Add to Cart</a>
+      </div>
     </div>
   </div>
-
-  <div class="card">
-    <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Rinser For Kitchen Sink">
-    <div class="card-body">
-      <h5 class="card-title">Glass Rinser For Kitchen Sink</h5>
-      <p class="card-text">Accessories for cleaning bottles, cups, and glasses efficiently.</p>
-      <p class="card-text">Price: &#8377;399</p>
-      <a href="glass.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter">
-    <div class="card-body">
-      <h5 class="card-title">Tap Filter</h5>
-      <p class="card-text">Activated carbon faucet water filters for cleaner tap water.</p>
-      <p class="card-text">Price: &#8377;199</p>
-      <a href="tappurifier.html" class="btn">Add to Cart</a>
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer>
-  <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
-</footer>
-
-<script>
-  let slideIndex = 0;
-
-  function showSlides() {
-    let slides = document.getElementsByClassName("mySlides");
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
+  </footer>
+  
+  <script>
+    let slideIndex = 0;
+  
+    function showSlides() {
+      let slides = document.getElementsByClassName("mySlides");
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1; }
+      slides[slideIndex - 1].style.display = "block";
+      setTimeout(showSlides, 3000);
     }
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    slides[slideIndex - 1].style.display = "block";
-    setTimeout(showSlides, 3000);
-  }
-  showSlides();
-
-  function loginUser() {
-    const username = document.getElementById('usernameInput').value;
-    const password = document.getElementById('passwordInput').value;
-
-    if (username && password) {
-      localStorage.setItem('loggedInUser', username);
-      document.getElementById('id01').style.display = 'none';
-      document.getElementById('loginButton').style.display = 'none';
-      document.getElementById('userSpan').innerText = `Hello, ${username}`;
-    } else {
-      alert('Please enter both username and password');
+    showSlides();
+  
+    function loginUser() {
+      const username = document.getElementById('usernameInput').value;
+      const password = document.getElementById('passwordInput').value;
+  
+      if (username && password) {
+        localStorage.setItem('loggedInUser', username);
+        document.getElementById('id01').style.display = 'none';
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('userSpan').innerText = `Hello, ${username}`;
+      } else {
+        alert('Please enter both username and password');
+      }
     }
-  }
-
-  function performSearch() {
-    const query = document.getElementById('search-input').value;
-    alert(`Searching for: ${query}`);
-  }
-
-  window.onload = function() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    if (loggedInUser) {
-      document.getElementById('loginButton').style.display = 'none';
-      document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
+  
+    function performSearch() {
+      const query = document.getElementById('search-input').value;
+      alert(`Searching for: ${query}`);
     }
-  }
-</script>
-</body>
-</html>
+  
+    window.onload = function() {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
+      }
+    }
+  </script>
+  </body>
+  </html>
