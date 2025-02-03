@@ -1,1 +1,157 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ShopSphere - Secure Checkout Page">
+    <meta name="keywords" content="ShopSphere, Cart, Checkout, Payment">
+    <meta name="author" content="ShopSphere">
+    <title>ShopSphere | Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            background: linear-gradient(to right, #10d7e6, #0a9fbf);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .price {
+            float: right;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #028a57;
+        }
+
+        .icon-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    SHOP SPHERE
+</div>
+
+
+
+<div class="container">
+    <h4>
+        Cart 
+        <span class="price"><i class="fa fa-shopping-cart"></i> <b>1</b></span>
+    </h4>
+    <p><a href="https://shopsphere12.github.io/shopsphere.in/glass.html">Bajaj Pygmy Mini Fan</a> <span class="price">₹1300</span></p>
+    <p>Delivery Service <span class="price">₹101</span></p>
+    <hr>
+    <p>Total <span class="price" style="color:black"><b>₹1300</b></span></p>
+
+    <div class="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_PLFlcVl88p3t9o/view" data-text="Pay Now" data-color="#528FF0" data-size="large">
+        <script>
+            (function() {
+                var d = document; 
+                var x = !d.getElementById('razorpay-embed-btn-js');
+                if (x) { 
+                    var s = d.createElement('script'); 
+                    s.defer = true; 
+                    s.id = 'razorpay-embed-btn-js';
+                    s.src = 'https://cdn.razorpay.com/static/embed_btn/bundle.js'; 
+                    d.body.appendChild(s);
+                } else {
+                    var rzp = window['__rzp__'];
+                    rzp && rzp.init && rzp.init();
+                }
+            })();
+        </script>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px; color: #555;">Make sure you have registered on the homepage!</p>
+</div>
+
+<div class="footer">
+    &copy; 2024 ShopSphere. All rights reserved.
+</div>
+
+</body>
+</html>
