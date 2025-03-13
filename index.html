@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,10 +17,10 @@
     </div>
     <span id="userSpan"></span>
     <button id="loginButton" onclick="document.getElementById('id01').style.display='block'">Login</button>
-  </div>
-  
-  <!-- Login Modal -->
-  <div id="id01" class="modal">
+</div>
+
+<!-- Login Modal -->
+<div id="id01" class="modal">
     <div class="modal-content">
       <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
       <h2>Login</h2>
@@ -31,28 +30,9 @@
         <button type="button" onclick="loginUser()">Login</button>
       </form>
     </div>
-  </div>
-  
-  <!-- Slideshow -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <img src="51DAMyOtGhL._AC_UF1000,1000_QL80_.jpg" alt="Glass Bar Sink Automatic Washing Device">
-      <div class="text">Glass Bar Sink Automatic Washing Device</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="81R-kaBBlsL._SX466_.jpg" alt="Tap Filter Multilayer Clean Purifier">
-      <div class="text">Tap Filter Multilayer Clean Purifier Filter Cartridge</div>
-    </div>
-    <div class="mySlides fade">
-      <img src="shopping.webp" alt="USB Rechargeable Mini Juicer Blender">
-      <div class="text">USB Rechargeable Mini Juicer Blender</div>
-    </div>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
-  
-  <!-- Product Cards -->
-    <!-- Product Cards -->
+</div>
+
+<!-- Product Cards -->
 <div class="card-container">
   <div class="card">
     <img src="SHOP SHPERE_files/Portable-Fan-Cooler-17-5-23-01.jpg" alt="Portable Fan Cooler">
@@ -103,9 +83,8 @@
       <a href="minifan.html" class="btn">Add to Cart</a>
     </div>
   </div>
-</div>
 
-      <div class="card">
+  <div class="card">
     <img src="51FNnHjzhQL._SY450_.jpg" alt="boAt Rockerz 450">
     <div class="card-body">
       <h5 class="card-title">boAt Rockerz 450</h5>
@@ -114,69 +93,39 @@
       <a href="boatrockerz.html" class="btn">Add to Cart</a>
     </div>
   </div>
-</div> <!-- This correctly closes card-container -->
+</div>
 
+<!-- Footer -->
+<footer>
+  <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
+  <p><a href="https://shopsphere12.github.io/shopsphere.in/shopshpere_HTML_FILES/contact.html">contact Shopsphere.in</a></p>
+  <p>&copy;<a href="termandcondtton.html">Term And Condtton</a></p>
+</footer>
 
-    
-    <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 ShopSphere. All Rights Reserved.</p>
-    <p><a href="https://shopsphere12.github.io/shopsphere.in/shopshpere_HTML_FILES/contact.html">contact Shopsphere.in</a></p>
-    <p>&copy;<a href="termandcondtton.html">Term And Condtton</a></p>
-  </footer>
-  
-  <script>
-    let slideIndex = 0;
-  
-    function showSlides() {
-      let slides = document.getElementsByClassName("mySlides");
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) { slideIndex = 1; }
-      slides[slideIndex - 1].style.display = "block";
-      setTimeout(showSlides, 3000);
-    }
-    showSlides();
-  
-    function loginUser() {
-      const username = document.getElementById('usernameInput').value;
-      const password = document.getElementById('passwordInput').value;
-  
-      if (username && password) {
-        localStorage.setItem('loggedInUser', username);
-        document.getElementById('id01').style.display = 'none';
-        document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('userSpan').innerText = `Hello, ${username}`;
+<script>
+  function performSearch() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const cards = document.getElementsByClassName('card');
+
+    Array.from(cards).forEach(card => {
+      const title = card.querySelector('.card-title').innerText.toLowerCase();
+      const description = card.querySelector('.card-text').innerText.toLowerCase();
+
+      if (title.includes(query) || description.includes(query)) {
+        card.style.display = 'block';
       } else {
-        alert('Please enter both username and password');
+        card.style.display = 'none';
       }
-    }
-  
-    function performSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const cards = document.getElementsByClassName('card');
+    });
+  }
 
-      Array.from(cards).forEach(card => {
-        const title = card.querySelector('.card-title').innerText.toLowerCase();
-        const description = card.querySelector('.card-text').innerText.toLowerCase();
-
-        if (title.includes(query) || description.includes(query)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+  window.onload = function() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      document.getElementById('loginButton').style.display = 'none';
+      document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
     }
-
-    window.onload = function() {
-      const loggedInUser = localStorage.getItem('loggedInUser');
-      if (loggedInUser) {
-        document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
-      }
-    }
-  </script>
-  </body>
-  </html>
+  }
+</script>
+</body>
+</html>
