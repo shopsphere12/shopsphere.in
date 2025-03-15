@@ -368,3 +368,24 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+/* Ensure dropdown is on top */
+.dropdown-content {
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    display: none;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Adjust slideshow position to avoid overlapping */
+.slideshow-container {
+    position: relative;
+    z-index: 1;
+}
+
