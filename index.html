@@ -18,19 +18,6 @@
     <button onclick="document.location="https://shopsphere12.github.io/shopsphere.com/#">Login</button>
   </div>
   
-  <!-- Login Modal -->
-  <div id="id01" class="modal">
-    <div class="modal-content">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close">&times;</span>
-      <h2>Login</h2>
-      <form id="loginForm">
-        <input type="text" placeholder="Enter Username" id="usernameInput" name="username" required>
-        <input type="password" placeholder="Enter Password" id="passwordInput" name="psw" required>
-        <button type="button" onclick="loginUser()">Login</button>
-      </form>
-    </div>
-  </div>
-  
   <!-- Slideshow -->
     <div class="slideshow-container">
     <div class="mySlides fade">
@@ -162,43 +149,6 @@
   }
 
   autoShowSlides();
-function loginUser() {
-      const username = document.getElementById('usernameInput').value;
-      const password = document.getElementById('passwordInput').value;
-  
-      if (username && password) {
-        localStorage.setItem('loggedInUser', username);
-        document.getElementById('id01').style.display = 'none';
-        document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('userSpan').innerText = `Hello, ${username}`;
-      } else {
-        alert('Please enter both username and password');
-      }
-    }
-  
-    function performSearch() {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      const cards = document.getElementsByClassName('card');
-
-      Array.from(cards).forEach(card => {
-        const title = card.querySelector('.card-title').innerText.toLowerCase();
-        const description = card.querySelector('.card-text').innerText.toLowerCase();
-
-        if (title.includes(query) || description.includes(query)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    window.onload = function() {
-      const loggedInUser = localStorage.getItem('loggedInUser');
-      if (loggedInUser) {
-        document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('userSpan').innerText = `Hello, ${loggedInUser}`;
-      }
-    }
   </script>
   </body>
   </html>
