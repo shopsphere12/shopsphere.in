@@ -196,6 +196,9 @@ function addToCart(name, price, image) {
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
 }
+        // Run update on page load
+document.addEventListener("DOMContentLoaded", updateCartCount);
+
 </script>
 
   </script>
