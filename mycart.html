@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopsphere - Shopping Cart</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f5f5f5;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
         h2 {
@@ -63,18 +62,21 @@
             font-weight: bold;
         }
 
-        .cart-actions button {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid gold;
+            padding: 5px;
+            border-radius: 20px;
         }
 
-        .cart-actions button:hover {
-            background-color: #cc0000;
+        .quantity-selector button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
         }
 
         /* Right - Billing Section */
@@ -117,7 +119,6 @@
             font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
         }
 
         .checkout-btn:hover {
@@ -131,7 +132,6 @@
             color: white;
             border-radius: 5px;
             cursor: pointer;
-            display: block;
             width: 100%;
             margin-top: 10px;
         }
@@ -149,7 +149,7 @@
     <div id="billing-container">
         <h3>Billing Summary</h3>
         <div id="cart-summary"></div>
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
         <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
     </div>
 </div>
@@ -159,21 +159,26 @@ function displayCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartHTML = "";
     let subtotal = 0;
-    let deliveryCharge = cart.length * 51; // ₹51 per item
     let totalTax = 0;
+    let deliveryCharge = 0;
 
     cart.forEach((item, index) => {
-        let itemTax = item.price * 0.18; // 18% GST
+        let itemTotal = item.price * item.quantity;
+        let itemTax = itemTotal * 0.18; // 18% GST
+        subtotal += itemTotal;
         totalTax += itemTax;
-        subtotal += item.price;
+        deliveryCharge += 51 * item.quantity; // ₹51 per item
 
         cartHTML += `<div class="cart-item">
             <img src="${item.image}" width="50">
             <div class="cart-details">
-                <p>${item.name} - ₹${item.price.toFixed(2)}</p>
+                <p>${item.name} - ₹${itemTotal.toFixed(2)}</p>
             </div>
-            <div class="cart-actions">
-                <button onclick="removeItem(${index})">Remove</button>
+            <div class="quantity-selector">
+                <button onclick="updateQuantity(${index}, -1)">➖</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${index}, 1)">➕</button>
+                <button onclick="removeItem(${index})">🗑️</button>
             </div>
         </div>`;
     });
@@ -189,6 +194,21 @@ function displayCart() {
     `;
 }
 
+// Function to update quantity
+function updateQuantity(index, change) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    if (cart[index].quantity + change > 0) {
+        cart[index].quantity += change;
+    } else {
+        cart.splice(index, 1); // Remove item if quantity is zero
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+// Remove item from cart
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.splice(index, 1);
@@ -196,9 +216,21 @@ function removeItem(index) {
     displayCart();
 }
 
+// Clear entire cart
 function clearCart() {
     localStorage.removeItem("cart");
     displayCart();
+}
+
+// Proceed to Razorpay Payment
+function proceedToCheckout() {
+    let grandTotal = document.getElementById("cart-summary").querySelector(".grand-total").textContent.match(/[\d\.]+/)[0];
+    
+    if (grandTotal > 0) {
+        window.location.href = `https://rzp.io/i/your-razorpay-link?amount=${grandTotal * 100}`;
+    } else {
+        alert("Cart is empty!");
+    }
 }
 
 // Load cart on page load
