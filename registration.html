@@ -39,13 +39,13 @@
 
         .password-container {
             position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .toggle-password {
             position: absolute;
             right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
             cursor: pointer;
         }
 
@@ -58,6 +58,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -94,14 +95,14 @@
             <input type="password" id="reg-password" placeholder="Password" required>
             <i class="fa fa-eye-slash toggle-password" onclick="togglePassword('reg-password', this)"></i>
         </div>
-        
+
         <div class="password-container">
             <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
             <i class="fa fa-eye-slash toggle-password" onclick="togglePassword('reg-confirm-password', this)"></i>
         </div>
 
         <!-- Google reCAPTCHA -->
-        <div class="g-recaptcha" data-sitekey="6LcA0wErAAAAABn_TH7cZ6hRKNvsmrqVX1o348fq"></div>
+        <div class="g-recaptcha" data-sitekey="6Ld00QErAAAAAOJQEEqaUfnDPO2aTYNFE8367vYJ"></div>
 
         <button onclick="register()">Register</button>
         <a href="login.html">Already have an account? Login</a>
@@ -149,8 +150,6 @@
             alert('Registration Successful! Please log in.');
             window.location.href = "login.html";
         }
-         <src="https://www.google.com/recaptcha/api.js" async defer>
-
     </script>
 </body>
 </html>
