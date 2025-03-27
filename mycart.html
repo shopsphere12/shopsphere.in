@@ -234,10 +234,10 @@ app.post("/create-order", async (req, res) => {
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
-</script>
+
     
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
+<src="https://checkout.razorpay.com/v1/checkout.js">
+
 async function proceedToCheckout() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let subtotal = cart.reduce((acc, item) => acc + item.price, 0);
