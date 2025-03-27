@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Shopping Cart</h2>
+<div id="cart-items"></div>
+<button onclick="clearCart()">Clear Cart</button>
+
+<script>
+function displayCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartHTML = "";
+
+    cart.forEach((item, index) => {
+        cartHTML += `<div>
+            <img src="${item.image}" width="50">
+            <p>${item.name} - ₹${item.price}</p>
+            <button onclick="removeItem(${index})">Remove</button>
+        </div>`;
+    });
+
+    document.getElementById("cart-items").innerHTML = cartHTML || "<p>Cart is empty.</p>";
+}
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+function clearCart() {
+    localStorage.removeItem("cart");
+    displayCart();
+}
+
+// Load cart on page load
+document.addEventListener("DOMContentLoaded", displayCart);
+</script>
+
+</body>
+</html>
