@@ -16,7 +16,8 @@
     </div>
     <a href="registration.html" class="btn">login</a>
   </div>
-  
+  <a href="mycart.html" class="cart-icon"> 🛒 <span id="cart-count">0</span></a>
+
   <!-- Slideshow -->
     <div class="slideshow-container">
     <div class="mySlides fade">
@@ -109,7 +110,7 @@
       <h5 class="card-title">boAt Rockerz 450</h5>
     <p class="card-text">boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes,</p>
         <p>Price: <span class="old-price">₹2599</span> <span class="new-price">₹1599</span></p>
-      <a href="boatrockerz.html" class="btn">Add to Cart</a>
+      <button onclick="addToCart('USB Rechargeable Mini Juicer', 499, 'shopping.webp')">Add to Cart</button>
     </div>
   </div>
 </div>
@@ -186,6 +187,13 @@ function performSearch() {
     if (found) {
         slideshow.style.display = "none";
     }
+}
+        // Function to add item to cart
+function addToCart(name, price, image) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name, price, image });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
 }
 </script>
 
