@@ -47,6 +47,37 @@ body {
   .topnav button:hover {
     background-color: #ffc107;
   }
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #007bff;
+    padding: 10px 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-center {
+    flex-grow: 1; /* Allows search bar to be centered */
+    display: flex;
+    justify-content: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+
+.search-btn {
+    background-color: yellow;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
   .search-bar {
     margin-left: auto;
