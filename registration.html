@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | ShopSphere</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -34,6 +35,18 @@
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
 
         button {
@@ -76,13 +89,38 @@
             <option value="Canada">Canada</option>
         </select>
         <input type="email" id="reg-email" placeholder="Email" required>
-        <input type="password" id="reg-password" placeholder="Password" required>
-        <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+
+        <div class="password-container">
+            <input type="password" id="reg-password" placeholder="Password" required>
+            <i class="fa fa-eye-slash toggle-password" onclick="togglePassword('reg-password', this)"></i>
+        </div>
+        
+        <div class="password-container">
+            <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+            <i class="fa fa-eye-slash toggle-password" onclick="togglePassword('reg-confirm-password', this)"></i>
+        </div>
+
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
+
         <button onclick="register()">Register</button>
         <a href="login.html">Already have an account? Login</a>
     </div>
 
     <script>
+        function togglePassword(fieldId, icon) {
+            const input = document.getElementById(fieldId);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+
         function register() {
             const name = document.getElementById('reg-name').value.trim();
             const email = document.getElementById('reg-email').value.trim();
@@ -90,6 +128,7 @@
             const country = document.getElementById('reg-country').value;
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm-password').value;
+            const recaptchaResponse = grecaptcha.getResponse();
 
             if (!name || !email || !phone || !country || !password || !confirmPassword) {
                 alert('Please fill in all fields.');
@@ -98,6 +137,11 @@
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match.');
+                return;
+            }
+
+            if (!recaptchaResponse) {
+                alert('Please verify that you are not a robot.');
                 return;
             }
 
