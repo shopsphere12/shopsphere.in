@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+E<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -101,9 +101,6 @@
             <i class="fa fa-eye-slash toggle-password" onclick="togglePassword('reg-confirm-password', this)"></i>
         </div>
 
-        <!-- Google reCAPTCHA -->
-        <div class="g-recaptcha" data-sitekey="6Ld00QErAAAAAOJQEEqaUfnDPO2aTYNFE8367vYJ"></div>
-
         <button onclick="register()">Register</button>
         <a href="login.html">Already have an account? Login</a>
     </div>
@@ -138,11 +135,6 @@
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match.');
-                return;
-            }
-
-            if (!recaptchaResponse) {
-                alert('Please verify that you are not a robot.');
                 return;
             }
 
