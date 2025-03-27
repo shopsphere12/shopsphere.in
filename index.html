@@ -158,6 +158,37 @@
   }
 
   autoShowSlides();
+        <script>
+function performSearch() {
+    let query = document.getElementById("search-input").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let slideshow = document.querySelector(".slideshow-container");
+
+    if (query.trim() === "") {
+        // Show all products and the slideshow if the search is empty
+        cards.forEach(card => card.style.display = "block");
+        slideshow.style.display = "block";
+        return;
+    }
+
+    let found = false;
+    cards.forEach(card => {
+        let title = card.querySelector(".card-title").innerText.toLowerCase();
+        if (title.includes(query)) {
+            card.style.display = "block";
+            found = true;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    // Hide the slideshow when searching
+    if (found) {
+        slideshow.style.display = "none";
+    }
+}
+</script>
+
   </script>
   </body>
   </html>
