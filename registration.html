@@ -1,4 +1,4 @@
-E<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -138,9 +138,12 @@ E<!DOCTYPE html>
                 return;
             }
 
-            localStorage.setItem('user', JSON.stringify({ name, email, phone, country, password }));
-            alert('Registration Successful! Please log in.');
-            window.location.href = "https://shopsphere12.github.io/shopsphere.in/";
+           localStorage.setItem('user', JSON.stringify({ name, email, phone, country, password }));
+    alert('Registration Successful! Please log in.');
+    
+    // Redirecting to login page
+    window.location.href = "https://shopsphere12.github.io/shopsphere.in/login.html";
+}
        
         
     </script>
