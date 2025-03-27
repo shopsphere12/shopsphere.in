@@ -7,21 +7,15 @@
     <title>ShopSphere</title>
 </head>
 <body>
-<div class="navbar">
-    <div class="nav-left">
-        <a href="login.html" style="color: white; text-decoration: none; margin-right: 20px;">Login</a>
+    <!-- Navigation Bar -->
+<div class="topnav">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button onclick="performSearch()">Search</button>
     </div>
-
-    <div class="nav-center">
-        <input type="text" class="search-bar" placeholder="Search...">
-        <button class="search-btn">Search</button>
-    </div>
-
-    <div class="nav-right">
-        <span class="cart-icon">🛒 0</span>
-    </div>
-</div>
-
+    <a href="registration.html" class="btn">login</a>
+    <a href="mycart.html" class="cart-icon"> 🛒 <span id="cart-count">0</span></a>
+  </div>
   <!-- Slideshow -->
     <div class="slideshow-container">
     <div class="mySlides fade">
