@@ -189,16 +189,22 @@ function performSearch() {
         slideshow.style.display = "none";
     }
 }
-        // Function to add item to cart
+// Function to add item to cart
 function addToCart(name, price, image) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push({ name, price, image });
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
 }
-        // Run update on page load
-document.addEventListener("DOMContentLoaded", updateCartCount);
 
+// Function to update cart count
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").innerText = cart.length;
+}
+
+// Run update on page load
+document.addEventListener("DOMContentLoaded", updateCartCount);
 </script>
 
   </script>
