@@ -185,11 +185,10 @@ body {
 
   .card img {
     width: 100%;
-    height: auto; /* Ensures the image scales properly */
-    object-fit: contain; /* Prevents cropping */
-    max-height: 250px; /* Adjust based on your design */
-
-  }
+    height: 200px; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image fills the space without distortion */
+    border-radius: 10px; /* Optional: adds rounded corners for better aesthetics */
+}
 
   .card-body {
     padding: 15px;
