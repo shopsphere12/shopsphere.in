@@ -203,7 +203,81 @@ function clearCart() {
 
 // Load cart on page load
 document.addEventListener("DOMContentLoaded", displayCart);
+
+const express = require("express");
+const Razorpay = require("razorpay");
+
+const app = express();
+app.use(express.json());
+
+const razorpay = new Razorpay({
+    key_id: "rzp_test_Em8NOZp4O05Ymo",
+    key_secret: "eU4Y7lDoBVa8qPTnQKJTFlPo",
+});
+
+app.post("/create-order", async (req, res) => {
+    const { amount, currency, cartItems } = req.body;
+
+    const options = {
+        amount: amount * 100, // Convert to paisa
+        currency: currency,
+        receipt: `order_rcptid_${Math.floor(Math.random() * 10000)}`,
+        notes: { cart: JSON.stringify(cartItems) }
+    };
+
+    try {
+        const order = await razorpay.orders.create(options);
+        res.json({ orderId: order.id });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
 </script>
+    
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+async function proceedToCheckout() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+    let deliveryCharge = cart.length * 51;
+    let tax = subtotal * 0.18;
+    let grandTotal = subtotal + tax + deliveryCharge;
+
+    const response = await fetch("/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            amount: grandTotal,
+            currency: "INR",
+            cartItems: cart
+        })
+    });
+
+    const data = await response.json();
+    if (data.orderId) {
+        var options = {
+            key: "rzp_test_Em8NOZp4O05Ymo",
+            amount: grandTotal * 100,
+            currency: "INR",
+            name: "Shopsphere",
+            description: "Order Payment",
+            order_id: data.orderId,
+            handler: function (response) {
+                alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                localStorage.removeItem("cart"); // Clear cart after payment
+                window.location.href = "success.html"; // Redirect to success page
+            },
+            theme: { color: "#007bff" }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    }
+}
+</script>
+
 
 </body>
 </html>
