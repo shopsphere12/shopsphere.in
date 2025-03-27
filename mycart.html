@@ -24,6 +24,14 @@
         #cart-container {
             width: 80%;
             margin: 20px auto;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Left - Cart Items */
+        #cart-items-container {
+            width: 60%;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -69,18 +77,23 @@
             background-color: #cc0000;
         }
 
-        .clear-btn {
-            background-color: #ff9800;
-            padding: 10px 15px;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
+        /* Right - Billing Section */
+        #billing-container {
+            width: 35%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        #billing-container h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
         }
 
         #cart-summary {
-            margin-top: 20px;
-            text-align: left;
             font-size: 18px;
             padding: 10px;
             background: #f8f9fa;
@@ -92,15 +105,53 @@
             font-weight: bold;
             color: #28a745;
         }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        .clear-btn {
+            background-color: #ff9800;
+            padding: 10px 15px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
 <h2>Shopping Cart</h2>
 <div id="cart-container">
-    <div id="cart-items"></div>
-    <div id="cart-summary"></div>
-    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+    <div id="cart-items-container">
+        <h3>Your Items</h3>
+        <div id="cart-items"></div>
+    </div>
+
+    <div id="billing-container">
+        <h3>Billing Summary</h3>
+        <div id="cart-summary"></div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
 </div>
 
 <script>
