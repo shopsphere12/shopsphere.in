@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopsphere - Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -149,8 +151,8 @@
     <div id="billing-container">
         <h3>Billing Summary</h3>
         <div id="cart-summary"></div>
-        <button class="checkout-btn">Proceed to Checkout</button>
-        <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+        <button class="checkout-btn" onclick="initiatePayment()">Proceed to Checkout</button>
+         <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
     </div>
 </div>
 
