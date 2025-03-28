@@ -204,6 +204,38 @@ function clearCart() {
 // Load cart on page load
 document.addEventListener("DOMContentLoaded", displayCart);
 
+     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    let totalTax = subtotal * 0.18; // 18% GST
+    let deliveryCharge = cart.length * 51; // ₹51 per item
+    let grandTotal = subtotal + totalTax + deliveryCharge;
+
+    let options = {
+        "key": "rzp_test_Em8NOZp4O05Ymo",  // Replace with your Razorpay Key ID
+        "amount": grandTotal * 100, // Razorpay expects amount in paise
+        "currency": "INR",
+        "name": "Shopsphere",
+        "description": "Order Payment",
+        "image": "https://shopsphere12.github.io/shopsphere.in/logo.png", // Change to your logo
+        "handler": function (response) {
+            alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+            localStorage.removeItem("cart"); // Clear cart after payment
+            window.location.href = "https://shopsphere12.github.io/shopsphere.in/order-success.html"; // Redirect after payment
+        },
+        "prefill": {
+            "name": "Customer Name",
+            "email": "customer@example.com",
+            "contact": "9999999999"
+        },
+        "theme": {
+            "color": "#007bff"
+        }
+    };
+
+    let rzp = new Razorpay(options);
+    rzp.open();
+}
+
+
 </script>
 
 
