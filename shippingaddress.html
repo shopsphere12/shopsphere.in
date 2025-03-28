@@ -1,14 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopsphere - Shopping Cart</title>
-    <link rel="stylesheet" href="style.css">
-	<h2>Shopping Cart</h2>
-</head>
-<style>
-    body {
+<html>
+    <style>
+   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -62,38 +55,22 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-</style>
+    </style>
     
-<body>
-  <div class="container">
-    <form method="post" action="https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec" name="contact-form">
-      <h4>Contact Us</h4>
-      <input type="text" name="your-name" placeholder="Name">
-      <input type="text" name="your-number" placeholder="Number">
-      <input type="email" name="your-email" placeholder="Email">
-      <textarea name="shipping-address" rows="7" placeholder="Your Message">
-      </textarea>
-      <input type="submit" value="Submit" id="submit">
-		</form>
-	</div>
-</body>
-
-<script>
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec'
-
-const form = document.forms['contact-form']
-
-form.addEventListener('submit', e => {
-  
-  e.preventDefault()
-  
-  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-  .then(response => alert("Thank you! Form is submitted" ))
-  .then(() => { window.location.reload(); })
-  .catch(error => console.error('Error!', error.message))
-})
-</script>
-
-</body>
+<head>
+	
+	<link rel="stylesheet" href="Google Sheet.css">
+</head>
+    
+    
+    <div class="container">
+		<form method="post" action="https://script.google.com/macros/s/AKfycbzUlrITElogfdDuDCA4g-IN0cAu7kIXkV8MoREtX5ElE5Z1HSm9eejyt5_WODYyCC7z/exec" name="contact-form">
+			<h4>REGISTRATION FORM</h4>
+			<input type="text" name="your-name" placeholder="Name">
+			<input type="text" name="your-number" placeholder="Number">
+			<input type="email" name="your-email" placeholder="Email">
+			<textarea type="SHIPPING ADDRESS" rows="5" placeholder="SHIPPING ADDRESS"></textarea>
+            <input type="text" name="lankmark" placeholder="lankmark"></input>
+			<input type="submit" value="Submit" id="submit"></input>
+                        </form>
 </html>
-
