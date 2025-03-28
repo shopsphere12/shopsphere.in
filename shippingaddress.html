@@ -1,76 +1,101 @@
 <!DOCTYPE html>
-<html>
-    <style>
-   body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    width: 50%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h4 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #007bff;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-textarea {
-    resize: none;
-}
-
-input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-    </style>
-    
+<html lang="en">
 <head>
-	
-	<link rel="stylesheet" href="Google Sheet.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 50%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-    
-    
-    <div class="container">
-		<form method="post" action="https://script.google.com/macros/s/AKfycbzUlrITElogfdDuDCA4g-IN0cAu7kIXkV8MoREtX5ElE5Z1HSm9eejyt5_WODYyCC7z/exec" name="contact-form">
-			<h4>REGISTRATION FORM</h4>
-			<input type="text" name="your-name" placeholder="Name">
-			<input type="text" name="your-number" placeholder="Number">
-			<input type="email" name="your-email" placeholder="Email">
-			<textarea type="SHIPPING ADDRESS" rows="5" placeholder="SHIPPING ADDRESS"></textarea>
-            <input type="text" name="lankmark" placeholder="lankmark"></input>
-			<input type="submit" value="Submit" id="submit"></input>
-                        </form>
+<body>
+
+<div class="container">
+    <form method="post" action="https://script.google.com/macros/s/AKfycbzUlrITElogfdDuDCA4g-IN0cAu7kIXkV8MoREtX5ElE5Z1HSm9eejyt5_WODYyCC7z/exec" name="contact-form" onsubmit="redirectToCart(event)">
+        <h4>REGISTRATION FORM</h4>
+        <input type="text" name="your-name" placeholder="Name" required>
+        <input type="text" name="your-number" placeholder="Number" required>
+        <input type="email" name="your-email" placeholder="Email" required>
+        <textarea name="shipping-address" rows="5" placeholder="SHIPPING ADDRESS" required></textarea>
+        <input type="text" name="landmark" placeholder="Landmark">
+        <input type="submit" value="Submit" id="submit">
+    </form>
+</div>
+
+<script>
+    function redirectToCart(event) {
+        event.preventDefault(); // Prevents immediate redirection
+        const form = document.forms["contact-form"];
+        
+        // Validate form fields
+        if (form["your-name"].value && form["your-number"].value && form["your-email"].value && form["shipping-address"].value) {
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+            })
+            .then(response => response.text())
+            .then(() => {
+                alert("Registration successful! Redirecting to cart...");
+                window.location.href = "https://shopsphere12.github.io/shopsphere.in/mycart.html";
+            })
+            .catch(error => console.error("Error!", error.message));
+        } else {
+            alert("Please fill all required fields.");
+        }
+    }
+</script>
+
+</body>
 </html>
