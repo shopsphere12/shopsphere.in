@@ -120,120 +120,36 @@
         margin-right: 10px;
     }
 </style>
-<body>
-
+    
 <h2>Shopping Cart</h2>
-<div id="cart-container">
-    <!-- Cart Items -->
-    <div id="cart-items-container">
-        <h3>Your Items</h3>
-        <div id="cart-items"></div>
-    </div>
-
-    <!-- Billing Summary -->
-    <div id="billing-container">
-        <h3>Billing Summary</h3>
-        <div id="cart-summary"></div>
-    </div>
-
-    <!-- Shipping Address -->
-    <div id="shipping-container">
-        <h3>Shipping Address</h3>
-        <form method="post" action="https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec" >
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" required>
-
-            <label for="address">Address:</label>
-            <textarea id="address" required></textarea>
-
-            <div class="checkbox-container">
-                <input type="checkbox" id="confirmShipping">
-                <label for="confirmShipping">I confirm that the shipping details are correct</label>
-            </div>
-
-            <button class="checkout-btn" onclick="initiatePayment()" disabled id="checkoutBtn">Proceed to Checkout</button>
-        </form>
-    </div>
-</div>
+<body>
+  <div class="container">
+    <form method="post" action="https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec" name="contact-form">
+      <h4>Contact Us</h4>
+      <input type="text" name="your-name" placeholder="Name">
+      <input type="text" name="your-number" placeholder="Number">
+      <input type="email" name="your-email" placeholder="Email">
+      <textarea name="message" rows="7" placeholder="Your Message">
+      </textarea>
+      <input type="submit" value="Submit" id="submit">
+		</form>
+	</div>
+</body>
 
 <script>
-function displayCart() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartHTML = "";
-    let subtotal = 0;
-    let deliveryCharge = cart.length * 51;
-    let totalTax = 0;
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec'
 
-    cart.forEach((item, index) => {
-        let itemTax = item.price * 0.18;
-        totalTax += itemTax;
-        subtotal += item.price;
+const form = document.forms['contact-form']
 
-        cartHTML += `<div class="cart-item">
-            <img src="${item.image}" width="50">
-            <div class="cart-details">
-                <p>${item.name} - ₹${item.price.toFixed(2)}</p>
-            </div>
-            <div class="cart-actions">
-                <button onclick="removeItem(${index})">Remove</button>
-            </div>
-        </div>`;
-    });
-
-    let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
-
-    document.getElementById("cart-items").innerHTML = cartHTML || "<p>Cart is empty.</p>";
-    document.getElementById("cart-summary").innerHTML = `
-        <p>Subtotal: ₹${subtotal.toFixed(2)}</p>
-        <p>Tax (18% GST): ₹${totalTax.toFixed(2)}</p>
-        <p>Delivery Charge: ₹${deliveryCharge.toFixed(2)}</p>
-        <p class="grand-total">Grand Total: ₹${grandTotal}</p>
-    `;
-}
-
-function removeItem(index) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-}
-
-function clearCart() {
-    localStorage.removeItem("cart");
-    displayCart();
-}
-
-document.addEventListener("DOMContentLoaded", displayCart);
-
-// Enable Checkout Button When Checkbox is Checked
-document.getElementById("confirmShipping").addEventListener("change", function () {
-    document.getElementById("checkoutBtn").disabled = !this.checked;
-});
-
-function initiatePayment() {
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
-    let address = document.getElementById("address").value;
-
-    if (!name || !email || !phone || !address) {
-        alert("Please fill out all shipping details.");
-        return;
-    }
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-    let totalTax = subtotal * 0.18;
-    let deliveryCharge = cart.length * 51;
-    let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
-
-    
+form.addEventListener('submit', e => {
+  
+  e.preventDefault()
+  
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+  .then(response => alert("Thank you! Form is submitted" ))
+  .then(() => { window.location.reload(); })
+  .catch(error => console.error('Error!', error.message))
+})
 </script>
 
 </body>
