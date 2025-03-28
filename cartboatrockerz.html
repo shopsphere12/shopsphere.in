@@ -127,16 +127,27 @@
     <hr>
     <p>Total <span class="price" style="color:black"><b>₹1937.82</b></span></p>
 
-<div className="razorpay-embed-btn" data-url="https://pages.razorpay.com/pl_QCG1FFE3rbNHBI/view" data-text="Pay Now" data-color="#528FF0" data-size="large"></div>
-  <script>
-    (function(){
-      var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
-      if(x){ var s=d.createElement('script'); s.defer=!0;s.id='razorpay-embed-btn-js';
-      s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
-      rzp && rzp.init && rzp.init()}})();
-  </script>
+ <div class="razorpay-embed-btn" data-url="https://rzp.io/rzp/4ujMcz3" data-text="Pay Now" data-color="#528FF0" data-size="large">
+        <script>
+            (function() {
+                var d = document; 
+                var x = !d.getElementById('razorpay-embed-btn-js');
+                if (x) { 
+                    var s = d.createElement('script'); 
+                    s.defer = true; 
+                    s.id = 'razorpay-embed-btn-js';
+                    s.src = 'https://cdn.razorpay.com/static/embed_btn/bundle.js'; 
+                    d.body.appendChild(s);
+                } else {
+                    var rzp = window['__rzp__'];
+                    rzp && rzp.init && rzp.init();
+                }
+            })();
+        </script>
+    </div>
+
+    <p style="text-align: center; margin-top: 20px; color: #555;">Make sure you have registered on the homepage!</p>
 </div>
-    
     
     
 <div class="footer">
