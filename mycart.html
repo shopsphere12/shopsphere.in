@@ -220,11 +220,11 @@ function initiatePayment() {
         "currency": "INR",
         "name": "Shopsphere",
         "description": "Order Payment",
-        "image": "https://shopsphere12.github.io/shopsphere.in/logo.png",
+        "image": "Screenshot 2024-09-16 113415.png",
         "handler": function (response) {
             alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
             localStorage.removeItem("cart"); // Clear cart after payment
-            window.location.href = "https://shopsphere12.github.io/shopsphere.in/order-success.html";
+            window.location.href = "order-success.html";
         },
         "prefill": {
             "name": "Customer Name",
