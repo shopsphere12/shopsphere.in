@@ -7,138 +7,137 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            text-align: center;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        text-align: center;
+    }
 
-        h2 {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            margin: 0;
-        }
+    h2 {
+        background-color: #007bff;
+        color: white;
+        padding: 15px;
+        margin: 0;
+    }
 
-        #cart-container {
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
+    #cart-container {
+        width: 80%;
+        margin: 20px auto;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
 
-        /* Left - Cart Items */
-        #cart-items-container {
-            width: 60%;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    /* Left - Cart Items */
+    #cart-items-container {
+        width: 60%;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+    }
 
-        .cart-item img {
-            width: 60px;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
+    .cart-item img {
+        width: 60px;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
 
-        .cart-details {
-            flex: 1;
-            text-align: left;
-        }
+    .cart-details {
+        flex: 1;
+        text-align: left;
+    }
 
-        .cart-details p {
-            margin: 0;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .cart-details p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-        .cart-actions button {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .cart-actions button {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        .cart-actions button:hover {
-            background-color: #cc0000;
-        }
+    .cart-actions button:hover {
+        background-color: #cc0000;
+    }
 
-        /* Right - Billing Section */
-        #billing-container {
-            width: 35%;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
+    /* Right - Billing Section */
+    #billing-container {
+        width: 35%;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
 
-        #billing-container h3 {
-            margin-top: 0;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-        }
+    #billing-container h3 {
+        margin-top: 0;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
 
-        #cart-summary {
-            font-size: 18px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
+    #cart-summary {
+        font-size: 18px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
 
-        .grand-total {
-            font-size: 22px;
-            font-weight: bold;
-            color: #28a745;
-        }
+    .grand-total {
+        font-size: 22px;
+        font-weight: bold;
+        color: #28a745;
+    }
 
-        .checkout-btn {
-            display: block;
-            width: 100%;
-            margin-top: 15px;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .checkout-btn {
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-        .checkout-btn:hover {
-            background-color: #218838;
-        }
+    .checkout-btn:hover {
+        background-color: #218838;
+    }
 
-        .clear-btn {
-            background-color: #ff9800;
-            padding: 10px 15px;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-        }
-    </style>
-</head>
+    .clear-btn {
+        background-color: #ff9800;
+        padding: 10px 15px;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
 <body>
 
 <h2>Shopping Cart</h2>
@@ -152,7 +151,7 @@
         <h3>Billing Summary</h3>
         <div id="cart-summary"></div>
         <button class="checkout-btn" onclick="initiatePayment()">Proceed to Checkout</button>
-         <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
+        <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
     </div>
 </div>
 
@@ -203,25 +202,29 @@ function clearCart() {
     displayCart();
 }
 
-// Load cart on page load
-document.addEventListener("DOMContentLoaded", displayCart);
+function initiatePayment() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
 
-     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
     let totalTax = subtotal * 0.18; // 18% GST
     let deliveryCharge = cart.length * 51; // ₹51 per item
     let grandTotal = subtotal + totalTax + deliveryCharge;
 
     let options = {
-        "key": "rzp_test_Em8NOZp4O05Ymo",  // Replace with your Razorpay Key ID
+        "key": "rzp_test_Em8NOZp4O05Ymo", // Replace with your Razorpay Key ID
         "amount": grandTotal * 100, // Razorpay expects amount in paise
         "currency": "INR",
         "name": "Shopsphere",
         "description": "Order Payment",
-        "image": "https://shopsphere12.github.io/shopsphere.in/logo.png", // Change to your logo
+        "image": "https://shopsphere12.github.io/shopsphere.in/logo.png",
         "handler": function (response) {
             alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
             localStorage.removeItem("cart"); // Clear cart after payment
-            window.location.href = "https://shopsphere12.github.io/shopsphere.in/order-success.html"; // Redirect after payment
+            window.location.href = "https://shopsphere12.github.io/shopsphere.in/order-success.html";
         },
         "prefill": {
             "name": "Customer Name",
@@ -237,9 +240,9 @@ document.addEventListener("DOMContentLoaded", displayCart);
     rzp.open();
 }
 
-
+// Load cart on page load
+document.addEventListener("DOMContentLoaded", displayCart);
 </script>
-
 
 </body>
 </html>
