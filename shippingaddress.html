@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopsphere - Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <style>
     body {
@@ -140,7 +139,7 @@
     <!-- Shipping Address -->
     <div id="shipping-container">
         <h3>Shipping Address</h3>
-        <form id="shippingForm">
+        <form method="post" action="https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec" >
             <label for="name">Full Name:</label>
             <input type="text" id="name" required>
 
@@ -161,8 +160,6 @@
             <button class="checkout-btn" onclick="initiatePayment()" disabled id="checkoutBtn">Proceed to Checkout</button>
         </form>
     </div>
-
-    <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
 </div>
 
 <script>
@@ -236,24 +233,7 @@ function initiatePayment() {
     let deliveryCharge = cart.length * 51;
     let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
-    let options = {
-        "key": "rzp_test_Em8NOZp4O05Ymo",
-        "amount": Math.round(grandTotal * 100),
-        "currency": "INR",
-        "name": "Shopsphere",
-        "description": "Order Payment",
-        "handler": function (response) {
-            alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-            localStorage.removeItem("cart");
-            window.location.href = "order-success.html";
-        },
-        "prefill": { "name": name, "email": email, "contact": phone },
-        "theme": { "color": "#007bff" }
-    };
-
-    let rzp = new Razorpay(options);
-    rzp.open();
-}
+    
 </script>
 
 </body>
