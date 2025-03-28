@@ -179,14 +179,14 @@ function displayCart() {
         </div>`;
     });
 
-    let grandTotal = subtotal + totalTax + deliveryCharge;
+    let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
     document.getElementById("cart-items").innerHTML = cartHTML || "<p>Cart is empty.</p>";
     document.getElementById("cart-summary").innerHTML = `
         <p>Subtotal: ₹${subtotal.toFixed(2)}</p>
         <p>Tax (18% GST): ₹${totalTax.toFixed(2)}</p>
         <p>Delivery Charge: ₹${deliveryCharge.toFixed(2)}</p>
-        <p class="grand-total">Grand Total: ₹${grandTotal.toFixed(2)}</p>
+        <p class="grand-total">Grand Total: ₹${grandTotal}</p>
     `;
 }
 
@@ -202,29 +202,28 @@ function clearCart() {
     displayCart();
 }
 
+document.addEventListener("DOMContentLoaded", displayCart);
+
 function initiatePayment() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-    }
-
     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-    let totalTax = subtotal * 0.18; // 18% GST
-    let deliveryCharge = cart.length * 51; // ₹51 per item
-    let grandTotal = subtotal + totalTax + deliveryCharge;
+    let totalTax = subtotal * 0.18;
+    let deliveryCharge = cart.length * 51;
+    let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
+
+    console.log("Final amount to be paid:", grandTotal); // Debugging log
 
     let options = {
-        "key": "rzp_test_Em8NOZp4O05Ymo", // Replace with your Razorpay Key ID
-        "amount": grandTotal * 100, // Razorpay expects amount in paise
+        "key": "rzp_test_Em8NOZp4O05Ymo",  // Replace with your Razorpay Key ID
+        "amount": Math.round(grandTotal * 100), // Convert to paise
         "currency": "INR",
         "name": "Shopsphere",
         "description": "Order Payment",
-        "image": "Screenshot 2024-09-16 113415.png",
+        "image": "Screenshot 2024-09-16 113415.png", // Change to your logo
         "handler": function (response) {
             alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
             localStorage.removeItem("cart"); // Clear cart after payment
-            window.location.href = "order-success.html";
+            window.location.href = "order-success.html"; // Redirect
         },
         "prefill": {
             "name": "Customer Name",
@@ -240,8 +239,6 @@ function initiatePayment() {
     rzp.open();
 }
 
-// Load cart on page load
-document.addEventListener("DOMContentLoaded", displayCart);
 </script>
 
 </body>
