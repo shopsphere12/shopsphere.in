@@ -79,6 +79,7 @@
     function redirectToCart(event) {
         event.preventDefault(); // Prevents immediate redirection
         const form = document.forms["contact-form"];
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec'
         
         // Validate form fields
         if (form["your-name"].value && form["your-number"].value && form["your-email"].value && form["shipping-address"].value) {
