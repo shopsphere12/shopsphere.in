@@ -64,7 +64,7 @@
 <body>
 
 <div class="container">
-    <form method="post" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec" name="contact-form" onsubmit="submitForm(event)">
+    <form id="contact-form" method="post" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec">
         <h4>REGISTRATION FORM</h4>
         <input type="text" name="your-name" placeholder="Name" required>
         <input type="number" name="your-number" placeholder="Number" required>
@@ -79,9 +79,9 @@
 </div>
 
 <script>
-    function submitForm(event) {
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
         event.preventDefault();
-        const form = document.forms["contact-form"];
+        const form = event.target;
         
         fetch(form.action, {
             method: "POST",
@@ -93,7 +93,7 @@
             window.location.href = "https://shopsphere12.github.io/shopsphere.in/mycart.html";
         })
         .catch(error => console.error("Error!", error.message));
-    }
+    });
 </script>
 
 </body>
