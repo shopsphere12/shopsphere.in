@@ -64,7 +64,7 @@
 <body>
 
 <div class="container">
-    <form id="contact-form" method="post" action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec">
+    <form method="post" action="https://script.google.com/macros/s/AKfycbzUlrITElogfdDuDCA4g-IN0cAu7kIXkV8MoREtX5ElE5Z1HSm9eejyt5_WODYyCC7z/exec" name="contact-form" onsubmit="redirectToCart(event)">
         <h4>REGISTRATION FORM</h4>
         <input type="text" name="your-name" placeholder="Name" required>
         <input type="number" name="your-number" placeholder="Number" required>
@@ -73,27 +73,33 @@
         <input type="text" name="landmark" placeholder="Landmark" required>
         <input type="text" name="Country-Region" placeholder="Country" required>
         <input type="number" name="Pincode" placeholder="Pincode" required>
-        <input type="text" name="state" placeholder="State" required>
-        <input type="submit" value="Submit">
+        <input type="text" name="state" placeholder="state" required>
+        <input type="submit" value="Submit" id="submit">
     </form>
 </div>
 
 <script>
-    document.getElementById("contact-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-        const form = event.target;
+    function redirectToCart(event) {
+        event.preventDefault(); // Prevents immediate redirection
+        const form = document.forms["contact-form"];
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyOq5qKcsyvMmsFJ9Aa6FQUnfJFYM0lfU8m2Gd2UpjPOohHK_BMR8QSd4XqtmVcGhw8/exec'
         
-        fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-        })
-        .then(response => response.text())
-        .then(() => {
-            alert("Registration successful! Redirecting to cart...");
-            window.location.href = "https://shopsphere12.github.io/shopsphere.in/mycart.html";
-        })
-        .catch(error => console.error("Error!", error.message));
-    });
+        // Validate form fields
+        if (form["your-name"].value && form["your-number"].value && form["your-email"].value && form["shipping-address"].value) {
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+            })
+            .then(response => response.text())
+            .then(() => {
+                alert("Registration successful! Redirecting to cart...");
+                window.location.href = "https://shopsphere12.github.io/shopsphere.in/mycart.html";
+            })
+            .catch(error => console.error("Error!", error.message));
+        } else {
+            alert("Please fill all required fields.");
+        }
+    }
 </script>
 
 </body>
