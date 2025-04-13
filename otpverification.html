@@ -1,30 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OTP Verification</title>
 </head>
 <body>
-  <h2>Send OTP</h2>
+  <h2>Enter Your Phone Number</h2>
+  <!-- Input field for the phone number -->
   <input type="text" id="phoneNumber" placeholder="Enter phone number" />
+  <!-- Button to trigger OTP sending -->
   <button onclick="sendOTP()">Send OTP</button>
 
   <script>
+    // Function to send OTP request
     async function sendOTP() {
-      const phoneNumber = document.getElementById("phoneNumber").value;
-      const response = await fetch("https://otpverification-9197.twil.io/send-otp").
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `phoneNumber=${encodeURIComponent(phoneNumber)}`
-      });
+      const phoneNumber = document.getElementById("phoneNumber").value;  // Get phone number from input field
 
-      const result = await response.json();
-      if (result.success) {
-        alert("OTP sent successfully!");
-        console.log("OTP (for testing):", result.otp);
-      } else {
-        alert("Failed to send OTP.");
+      // Validate phone number format (simple validation)
+      if (!phoneNumber) {
+        alert("+19787248242.");
+        return;
+      }
+
+      // Send the phone number to Twilio function
+      try {
+        const response = await fetch("https://otpverification-9197.twil.io/send-otp", {
+          method: "POST", // We're sending data, so we use POST
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded", // We're sending data in this format
+          },
+          body: `phoneNumber=${encodeURIComponent(phoneNumber)}` // Send the phone number in this format
+        });
+
+        const result = await response.json();  // Receive the response from Twilio function
+
+        if (result.success) {
+          alert("OTP sent successfully!");
+        } else {
+          alert("Failed to send OTP.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("There was an error sending the OTP. Please try again.");
       }
     }
   </script>
