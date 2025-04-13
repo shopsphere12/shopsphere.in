@@ -37,6 +37,7 @@
 
         const result = await response.json();
 
+        // Check the response from the backend
         if (result.success) {
           // Show OTP input section
           document.getElementById("otpSection").style.display = "block";
@@ -51,7 +52,13 @@
 
     function verifyOTP() {
       const enteredOTP = document.getElementById("otp").value;
-      // Add logic here to check OTP if you're storing it in memory/session/server
+      
+      if (!enteredOTP) {
+        alert("Please enter the OTP.");
+        return;
+      }
+
+      // Add your OTP verification logic here, like checking if the entered OTP matches the sent OTP
       alert("You entered: " + enteredOTP); // Placeholder for now
     }
   </script>
