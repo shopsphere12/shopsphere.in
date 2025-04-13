@@ -17,10 +17,10 @@
     async function sendOTP() {
       const phoneNumber = document.getElementById("phoneNumber").value;  // Get phone number from input field
 
-      // Validate phone number format (basic validation to check if it starts with '+')
-      const phoneRegex = /^\+?\d{1,15}$/; // Basic regex to match international phone numbers
-      if (!phoneNumber || !phoneRegex.test(phoneNumber)) {
-        alert("Please enter a valid phone number in international format (e.g., +19787248242).");
+      // Validate phone number format (simple validation)
+      const phonePattern = /^\+?\d{1,3}?[-.\s]?\(?\d{1,4}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}$/;
+      if (!phoneNumber || !phonePattern.test(phoneNumber)) {
+        alert("Please enter a valid phone number (e.g., +19787248242).");
         return;
       }
 
