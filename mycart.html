@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopsphere - Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <style>
     body {
@@ -205,39 +204,21 @@ function clearCart() {
 
 document.addEventListener("DOMContentLoaded", displayCart);
 
-function initiatePayment() {
+    function initiatePayment() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
     let totalTax = subtotal * 0.18;
     let deliveryCharge = cart.length * 51;
     let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
-    console.log("Final amount to be paid:", grandTotal); // Debugging log
-
-    let options = {
-        "key": "rzp_test_Em8NOZp4O05Ymo",  // Replace with your Razorpay Key ID
-        "amount": Math.round(grandTotal * 100), // Convert to paise
-        "currency": "INR",
-        "name": "Shopsphere",
-        "description": "Order Payment",
-        "image": "Screenshot 2024-09-16 113415.png", // Change to your logo
-        "handler": function (response) {
-            alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-            localStorage.removeItem("cart"); // Clear cart after payment
-            window.location.href = "order-success.html"; // Redirect
-        },
-        "prefill": {
-            "name": "Customer Name",
-            "email": "customer@example.com",
-            "contact": "9999999999"
-        },
-        "theme": {
-            "color": "#007bff"
-        }
-    };
-
-    let rzp = new Razorpay(options);
-    rzp.open();
+    // Simulate confirmation popup like online payment
+    let confirmCash = confirm("Cash on Delivery selected.\n\nGrand Total: ₹" + grandTotal + "\n\nDo you want to place the order?");
+    
+    if (confirmCash) {
+        alert("Order placed successfully! Please keep ₹" + grandTotal + " ready.");
+        localStorage.removeItem("cart");
+        window.location.href = "order-success.html";
+    }
 }
 
 </script>
