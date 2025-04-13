@@ -42,6 +42,7 @@
         });
 
         const result = await response.json();  // Receive the response from Twilio function
+        console.log(result);  // Log the result to check for success
 
         if (result.success) {
           alert("OTP sent successfully!");
