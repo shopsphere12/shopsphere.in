@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopsphere - Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://sdk.cashfree.com/js/ui/2.0.0/cashfree.sandbox.js"></script>
 </head>
 <style>
     body {
@@ -204,18 +205,42 @@ function clearCart() {
 
 document.addEventListener("DOMContentLoaded", displayCart);
 
-  function initiatePayment() {
+function initiatePayment() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
     let totalTax = subtotal * 0.18;
     let deliveryCharge = cart.length * 51;
     let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
-    alert("Cash Fee: ₹" + grandTotal + "\nYour order has been confirmed!");
-
-    localStorage.removeItem("cart");
-    window.location.href = "order-success.html";
+    // Call your backend to get the payment session ID from Cashfree
+    fetch("https://your-server.com/create-order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            amount: grandTotal,
+            currency: "INR",
+            customer_id: "CUST123", // Replace with actual user id/email
+            customer_email: "test@example.com",
+            customer_phone: "9999999999"
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.payment_session_id) {
+            const cashfree = new Cashfree(data.payment_session_id);
+            cashfree.redirect();
+        } else {
+            alert("Error creating payment session");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Payment initiation failed");
+    });
 }
+
 
 </script>
 
