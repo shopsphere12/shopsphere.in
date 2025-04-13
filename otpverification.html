@@ -12,6 +12,13 @@
   <!-- Button to trigger OTP sending -->
   <button onclick="sendOTP()">Send OTP</button>
 
+  <!-- OTP Input Section (Initially Hidden) -->
+  <div id="otpSection" style="display:none;">
+    <h3>Enter the OTP sent to your phone</h3>
+    <input type="text" id="otp" placeholder="Enter OTP" />
+    <button onclick="verifyOTP()">Verify OTP</button>
+  </div>
+
   <script>
     // Function to send OTP request
     async function sendOTP() {
@@ -38,12 +45,48 @@
 
         if (result.success) {
           alert("OTP sent successfully!");
+          // Show OTP input field and hide the phone number input
+          document.getElementById("otpSection").style.display = "block";
+          document.getElementById("phoneNumber").disabled = true;  // Disable the phone number field
         } else {
           alert("Failed to send OTP.");
         }
       } catch (error) {
         console.error("Error:", error);
         alert("There was an error sending the OTP. Please try again.");
+      }
+    }
+
+    // Function to verify the entered OTP
+    async function verifyOTP() {
+      const otp = document.getElementById("otp").value;  // Get OTP from input field
+
+      if (!otp) {
+        alert("Please enter the OTP.");
+        return;
+      }
+
+      // Send the OTP to the server for verification (you can add your backend OTP verification here)
+      try {
+        const response = await fetch("https://otpverification-9197.twil.io/verify-otp", {
+          method: "POST", // We're sending data, so we use POST
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded", // We're sending data in this format
+          },
+          body: `otp=${encodeURIComponent(otp)}` // Send the OTP for verification
+        });
+
+        const result = await response.json();  // Receive the response from server
+
+        if (result.success) {
+          alert("OTP verified successfully!");
+          // Redirect or perform next steps
+        } else {
+          alert("Incorrect OTP. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("There was an error verifying the OTP. Please try again.");
       }
     }
   </script>
