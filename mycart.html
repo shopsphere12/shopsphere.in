@@ -204,21 +204,17 @@ function clearCart() {
 
 document.addEventListener("DOMContentLoaded", displayCart);
 
-    function initiatePayment() {
+  function initiatePayment() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
     let totalTax = subtotal * 0.18;
     let deliveryCharge = cart.length * 51;
     let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
-    // Simulate confirmation popup like online payment
-    let confirmCash = confirm("Cash on Delivery selected.\n\nGrand Total: ₹" + grandTotal + "\n\nDo you want to place the order?");
-    
-    if (confirmCash) {
-        alert("Order placed successfully! Please keep ₹" + grandTotal + " ready.");
-        localStorage.removeItem("cart");
-        window.location.href = "order-success.html";
-    }
+    alert("Cash Fee: ₹" + grandTotal + "\nYour order has been confirmed!");
+
+    localStorage.removeItem("cart");
+    window.location.href = "order-success.html";
 }
 
 </script>
