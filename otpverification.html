@@ -7,12 +7,10 @@
 </head>
 <body>
   <h2>Enter Your Phone Number</h2>
-  <!-- Input field for the phone number -->
   <input type="text" id="phoneNumber" placeholder="Enter phone number" />
-  <!-- Button to trigger OTP sending -->
   <button onclick="sendOTP()">Send OTP</button>
 
-  <!-- OTP Input Section (Initially Hidden) -->
+  <!-- OTP Input Section -->
   <div id="otpSection" style="display:none;">
     <h3>Enter the OTP sent to your phone</h3>
     <input type="text" id="otp" placeholder="Enter OTP" />
@@ -20,37 +18,42 @@
   </div>
 
   <script>
-  async function sendOTP() {
-    const phoneNumber = document.getElementById("phoneNumber").value;
+    async function sendOTP() {
+      const phoneNumber = document.getElementById("phoneNumber").value;
 
-    if (!phoneNumber) {
-      alert("Please enter your phone number.");
-      return;
-    }
-
-    try {
-      const response = await fetch("https://otpverification-9197.twil.io/send-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `phoneNumber=${encodeURIComponent(phoneNumber)}`
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        alert("OTP sent successfully!");
-        // You can now show the OTP input field here
-      } else {
-        alert("Failed to send OTP: " + (result.error || "Unknown error"));
+      if (!phoneNumber) {
+        alert("Please enter your phone number.");
+        return;
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("There was an error sending the OTP. Please try again.");
-    }
-  }
-</script>
 
+      try {
+        const response = await fetch("https://otpverification-9197.twil.io/send-otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `phoneNumber=${encodeURIComponent(phoneNumber)}`
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show OTP input section
+          document.getElementById("otpSection").style.display = "block";
+        } else {
+          alert("Failed to send OTP: " + (result.error || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("There was an error sending the OTP. Please try again.");
+      }
+    }
+
+    function verifyOTP() {
+      const enteredOTP = document.getElementById("otp").value;
+      // Add logic here to check OTP if you're storing it in memory/session/server
+      alert("You entered: " + enteredOTP); // Placeholder for now
+    }
+  </script>
 </body>
 </html>
