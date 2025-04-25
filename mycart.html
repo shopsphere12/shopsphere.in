@@ -222,8 +222,8 @@ function initiatePayment() {
             amount: grandTotal,
             currency: "INR",
             customer_id: "CUST123", // Replace with actual user id/email
-            customer_email: "test@example.com",
-            customer_phone: "9999999999"
+            customer_email: "test@example.com",  // Replace with actual email
+            customer_phone: "9999999999"  // Replace with actual phone number
         })
     })
     .then(res => res.json())
@@ -240,8 +240,6 @@ function initiatePayment() {
         alert("Payment initiation failed");
     });
 }
-
-
 </script>
 
 </body>
