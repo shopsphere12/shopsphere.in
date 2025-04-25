@@ -213,7 +213,8 @@ function initiatePayment() {
     let grandTotal = (subtotal + totalTax + deliveryCharge).toFixed(2);
 
     // Call your backend to get the payment session ID from Cashfree
-    fetch("https://your-server.com/create-order", {
+    fetch("https://script.google.com/macros/s/AKfycbykstL1UY9p7epdWQKPiTbaVmzQGeuMypWzQ4vacXzZFYVQ_ekVE2KEvZ5dUxOGHz6ZWQ/exec", {
+
         method: "POST",
         headers: {
             "Content-Type": "application/json"
